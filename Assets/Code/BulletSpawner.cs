@@ -6,6 +6,7 @@ public class BulletSpawner : MonoBehaviour
 {
     public float delayBetweenShoot = 1.0f;
     public GameObject bullet;
+    public PlayerController player;
     private float timer = 0;
     private Vector3 location;
 
@@ -18,7 +19,10 @@ public class BulletSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        location = transform.position;
+        if (player.isSlowMo)
+        {
+            return;
+        }
 
         timer += Time.deltaTime;
 
@@ -30,8 +34,7 @@ public class BulletSpawner : MonoBehaviour
 
     void Spawn()
     {
-
-        GameObject newBullet = Instantiate(bullet, location, Quaternion.identity);
+        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
         newBullet.transform.rotation = transform.rotation;
         timer = 0;
     }

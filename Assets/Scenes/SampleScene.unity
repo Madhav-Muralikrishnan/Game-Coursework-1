@@ -1126,6 +1126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac0b09e7857660247b1477e93731de29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1962811025 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3009230849025195590, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
+  m_PrefabInstance: {fileID: 3009230848450265091}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2130414835
 GameObject:
   m_ObjectHideFlags: 3
@@ -1195,7 +1200,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130414835}
-  m_LocalRotation: {x: 0.02882016, y: 0.9700955, z: -0.19209816, w: 0.14554177}
+  m_LocalRotation: {x: 0.028820144, y: 0.9700955, z: -0.19209816, w: 0.14554174}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1211,6 +1216,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2833714811085492268, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
+      propertyPath: bullet
+      value: 
+      objectReference: {fileID: 1962811025}
+    - target: {fileID: 2833714811085492268, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1232955696}
     - target: {fileID: 2833714811085492269, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: m_Name
       value: BulletSpawner
