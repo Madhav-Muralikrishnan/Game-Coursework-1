@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         isSlowMo = Input.GetKey(KeyCode.Mouse0);
 
         Vector3 movement = new Vector3(movementX, 0.0f, movementY);
-
+        
         rb.AddForce(movement * speed);
     }
 
