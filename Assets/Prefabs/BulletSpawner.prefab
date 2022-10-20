@@ -46,3 +46,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delayBetweenShoot: 1
   bullet: {fileID: 3009230849025195590, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
+  bulletMovement: {fileID: 3009230849025195593, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
+  player: {fileID: 5133444110511758209, guid: 022e1f06c53cd924d84216df1d105317, type: 3}
