@@ -6,14 +6,18 @@ public class BulletSpawner : MonoBehaviour
 {
     public float delayBetweenShoot = 1.0f;
     public GameObject bullet;
+    public BulletMovement bulletMovement;
     public PlayerController player;
     private float timer = 0;
-    private Vector3 location;
+    private float speedRatio;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         timer = 0;
+
+        speedRatio = bulletMovement.slowedSpeed / bulletMovement.movementSpeed;
     }
 
     // Update is called once per frame
@@ -21,10 +25,12 @@ public class BulletSpawner : MonoBehaviour
     {
         if (player.isSlowMo)
         {
-            return;
+            timer += Time.deltaTime * speedRatio;
         }
-
-        timer += Time.deltaTime;
+        else
+        {
+            timer += Time.deltaTime;
+        }
 
         if (timer >= delayBetweenShoot)
         {
