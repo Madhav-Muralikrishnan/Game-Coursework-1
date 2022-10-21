@@ -5,7 +5,9 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
     public float delayBetweenShoot = 1.0f;
+    public List<GameObject> pooledBullets;
     public GameObject bullet;
+    public int amountToPool;
     public BulletMovement bulletMovement;
     public ThirdPersonCamera player;
     private float timer = 0;
@@ -16,6 +18,15 @@ public class BulletSpawner : MonoBehaviour
     void Start()
     {
         timer = 0;
+
+        pooledBullets = new List<GameObject>();
+        GameObject temp;
+        for(int i = 0; i < amountToPool; i++)
+        {
+            temp = Instantiate(bullet);
+            temp.SetActive(false);
+            pooledBullets.Add(temp);
+        }
 
         speedRatio = bulletMovement.slowedSpeed / bulletMovement.movementSpeed;
     }
@@ -40,8 +51,26 @@ public class BulletSpawner : MonoBehaviour
 
     void Spawn()
     {
-        GameObject newBullet = Instantiate(bullet, transform.position, Quaternion.identity);
-        newBullet.transform.rotation = transform.rotation;
+        GameObject bullet = GetObject(); 
+        if (bullet != null)
+        {
+            bullet.transform.position = transform.position;
+            bullet.transform.rotation = transform.rotation;
+            bullet.SetActive(true);
+        }
+
         timer = 0;
+    }
+
+    GameObject GetObject()
+    {
+        foreach(GameObject obj in pooledBullets)
+        {
+            if(!obj.activeInHierarchy)
+            {
+                return obj;
+            }
+        }
+        return null;
     }
 }

@@ -6,6 +6,6 @@ public class BulletCollision : MonoBehaviour
 {
    private void OnCollisionEnter(Collision collision)
    {
-        Destroy(gameObject);
+      gameObject.SetActive(false);
    }
 }
