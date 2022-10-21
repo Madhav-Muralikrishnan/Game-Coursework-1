@@ -7,7 +7,7 @@ public class BulletSpawner : MonoBehaviour
     public float delayBetweenShoot = 1.0f;
     public GameObject bullet;
     public BulletMovement bulletMovement;
-    public PlayerController player;
+    public ThirdPersonCamera player;
     private float timer = 0;
     private float speedRatio;
     

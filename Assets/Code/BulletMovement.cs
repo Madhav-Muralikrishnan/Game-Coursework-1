@@ -6,7 +6,7 @@ public class BulletMovement : MonoBehaviour
 {
     public float movementSpeed = 5.0f;
     public float slowedSpeed = 0.5f;
-    public PlayerController player;
+    public ThirdPersonCamera player;
 
     // Start is called before the first frame update
     void Start()

@@ -5,10 +5,9 @@ using UnityEngine;
 public class ThirdPersonCamera : MonoBehaviour
 {
     private CharacterController controller;
-
     public Camera followCam;
-
     public float speed = 0;
+    public bool isSlowMo = false;
 
     void Start()
     {
@@ -19,8 +18,8 @@ public class ThirdPersonCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isSlowMo = Input.GetKey(KeyCode.Mouse0);
         Move();
-
     }
 
     private void Move()
