@@ -4,73 +4,73 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-    public float delayBetweenShoot = 1.0f;
-    public List<GameObject> pooledBullets;
-    public GameObject bullet;
-    public int amountToPool;
-    public BulletMovement bulletMovement;
-    public ThirdPersonCamera player;
-    private float timer = 0;
-    private float speedRatio;
-    
+	public float delayBetweenShoot = 1.0f;
+	public List<GameObject> pooledBullets;
+	public GameObject bullet;
+	public int amountToPool;
+	public BulletMovement bulletMovement;
+	public ThirdPersonCamera player;
+	private float timer = 0;
+	private float speedRatio;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        timer = 0;
 
-        pooledBullets = new List<GameObject>();
-        GameObject temp;
-        for(int i = 0; i < amountToPool; i++)
-        {
-            temp = Instantiate(bullet);
-            temp.SetActive(false);
-            pooledBullets.Add(temp);
-        }
+	// Start is called before the first frame update
+	void Start()
+	{
+		timer = 0;
 
-        speedRatio = bulletMovement.slowedSpeed / bulletMovement.movementSpeed;
-    }
+		pooledBullets = new List<GameObject>();
+		GameObject temp;
+		for(int i = 0; i < amountToPool; i++)
+		{
+			temp = Instantiate(bullet);
+			temp.SetActive(false);
+			pooledBullets.Add(temp);
+		}
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (player.isSlowMo)
-        {
-            timer += Time.deltaTime * speedRatio;
-        }
-        else
-        {
-            timer += Time.deltaTime;
-        }
+		speedRatio = bulletMovement.slowedSpeed / bulletMovement.movementSpeed;
+	}
 
-        if (timer >= delayBetweenShoot)
-        {
-            Spawn();
-        }
-    }
+	// Update is called once per frame
+	void Update()
+	{
+		if (player.isSlowMo)
+		{
+			timer += Time.deltaTime * speedRatio;
+		}
+		else
+		{
+			timer += Time.deltaTime;
+		}
 
-    void Spawn()
-    {
-        GameObject bullet = GetObject(); 
-        if (bullet != null)
-        {
-            bullet.transform.position = transform.position;
-            bullet.transform.rotation = transform.rotation;
-            bullet.SetActive(true);
-        }
+		if (timer >= delayBetweenShoot)
+		{
+			Spawn();
+		}
+	}
 
-        timer = 0;
-    }
+	void Spawn()
+	{
+		GameObject bullet = GetObject(); 
+		if (bullet != null)
+		{
+			bullet.transform.position = transform.position;
+			bullet.transform.rotation = transform.rotation;
+			bullet.SetActive(true);
+		}
 
-    GameObject GetObject()
-    {
-        foreach(GameObject obj in pooledBullets)
-        {
-            if(!obj.activeInHierarchy)
-            {
-                return obj;
-            }
-        }
-        return null;
-    }
+		timer = 0;
+	}
+
+	GameObject GetObject()
+	{
+		foreach(GameObject obj in pooledBullets)
+		{
+			if(!obj.activeInHierarchy)
+			{
+				return obj;
+			}
+		}
+		return null;
+	}
 }
