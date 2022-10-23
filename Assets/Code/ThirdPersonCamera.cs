@@ -33,7 +33,6 @@ public class ThirdPersonCamera : MonoBehaviour
 					slowMoTimer = 0;
 					canSlowMo = false;
 				}
-				Debug.LogWarning(slowMoTimer);
 			}
 		}
 		else
