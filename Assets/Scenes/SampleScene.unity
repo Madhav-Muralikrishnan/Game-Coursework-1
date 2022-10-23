@@ -284,7 +284,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &267941453
 GameObject:
@@ -542,6 +542,38 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2630656849795223782, guid: cc298213413865f4d82e172f1aee248f, type: 3}
   m_PrefabInstance: {fileID: 469899499}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &518141272
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 518141273}
+  m_Layer: 0
+  m_Name: Bullet Spawners
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &518141273
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 518141272}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -14.945059, y: 5.01346, z: -5.12313}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2833714810773195236}
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &593200932
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1524,7 +1556,7 @@ Transform:
   - {fileID: 1325797402}
   - {fileID: 886049701}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1319727019
 PrefabInstance:
@@ -1909,7 +1941,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450978327}
-  m_LocalRotation: {x: 0.034087934, y: 0.9624774, z: -0.22721004, w: 0.14439884}
+  m_LocalRotation: {x: 0.03408794, y: 0.9624774, z: -0.22721004, w: 0.14439885}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2842,7 +2874,7 @@ Transform:
   - {fileID: 469899500}
   - {fileID: 972788408}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1958918760
 GameObject:
@@ -3125,7 +3157,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 0}
+    m_TransformParent: {fileID: 518141273}
     m_Modifications:
     - target: {fileID: 2833714811085492268, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: bullet
@@ -3145,19 +3177,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2833714811085492275, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2833714811085492275, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.07
+      value: 17.015059
       objectReference: {fileID: 0}
     - target: {fileID: 2833714811085492275, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.39
+      value: -2.62346
       objectReference: {fileID: 0}
     - target: {fileID: 2833714811085492275, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2.993
+      value: 8.11613
       objectReference: {fileID: 0}
     - target: {fileID: 2833714811085492275, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3189,6 +3221,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
+--- !u!4 &2833714810773195236 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2833714811085492275, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
+  m_PrefabInstance: {fileID: 2833714810773195235}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3009230848450265091
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3466,7 +3503,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6794374245803928443, guid: 022e1f06c53cd924d84216df1d105317, type: 3}
       propertyPath: speed
-      value: 2
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6794374245803928443, guid: 022e1f06c53cd924d84216df1d105317, type: 3}
       propertyPath: followCam

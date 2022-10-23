@@ -25,6 +25,7 @@ public class BulletSpawner : MonoBehaviour
 		{
 			temp = Instantiate(bullet);
 			temp.SetActive(false);
+			temp.transform.parent = gameObject.transform;
 			pooledBullets.Add(temp);
 		}
 
