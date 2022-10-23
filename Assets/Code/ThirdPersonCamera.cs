@@ -9,11 +9,13 @@ public class ThirdPersonCamera : MonoBehaviour
 	public float speed = 0;
 	public bool isSlowMo = false;
 	public bool canSlowMo = false;
-	public double slowMoTimer = 2;
+	public double slowMoTimer;
+	public double slowMoTimerMax = 2;
 
 	void Start()
 	{
 		controller = GetComponent<CharacterController>();
+		slowMoTimer = slowMoTimerMax;
 	}
 
 
