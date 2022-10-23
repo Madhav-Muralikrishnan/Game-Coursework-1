@@ -8,6 +8,8 @@ public class ThirdPersonCamera : MonoBehaviour
 	public Camera followCam;
 	public float speed = 0;
 	public bool isSlowMo = false;
+	public bool canSlowMo = false;
+	public double slowMoTimer = 2;
 
 	void Start()
 	{
@@ -18,7 +20,28 @@ public class ThirdPersonCamera : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		isSlowMo = Input.GetKey(KeyCode.Mouse0);
+		if (slowMoTimer != 0)
+		{
+			canSlowMo = true;
+			isSlowMo = Input.GetKey(KeyCode.Mouse0);
+
+			if (isSlowMo)
+			{
+				slowMoTimer -= Time.deltaTime;
+				if (slowMoTimer < 0)
+				{
+					slowMoTimer = 0;
+					canSlowMo = false;
+				}
+				Debug.LogWarning(slowMoTimer);
+			}
+		}
+		else
+		{
+			canSlowMo = false;
+			isSlowMo = false;
+		}
+
 		Move();
 	}
 
