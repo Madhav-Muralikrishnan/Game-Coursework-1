@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6794374245803928443}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -176,3 +176,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   followCam: {fileID: 0}
   speed: 0
+  isSlowMo: 0
