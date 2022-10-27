@@ -7,22 +7,34 @@ public class BulletMovement : MonoBehaviour
 	public float movementSpeed = 5.0f;
 	public float slowedSpeed = 0.5f;
 	public ThirdPersonCamera player;
+	private Rigidbody rigidBody;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		
+		rigidBody = GetComponent<Rigidbody>();
+		rigidBody.AddForce(transform.forward * movementSpeed);
 	}
 
 	// Update is called once per fixed frame
 	void FixedUpdate()
 	{
+		rigidBody.velocity = Vector3.zero;
 		if(player.isSlowMo)
 		{
-			transform.position += transform.forward * Time.deltaTime * slowedSpeed;
+			rigidBody.AddForce(transform.forward * slowedSpeed, ForceMode.Impulse);
 			return;
 		}
+		rigidBody.AddForce(transform.forward * movementSpeed, ForceMode.Impulse);
+	}
+
+	public void CollideWithWall()
+	{
 		
-		transform.position += transform.forward * Time.deltaTime * movementSpeed;
+	}
+
+	public void CollideWithFloor()
+	{
+
 	}
 }

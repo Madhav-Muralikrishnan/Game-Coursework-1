@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class PlayerCollisionScript : MonoBehaviour
 {
-	private void OnCollisionEnter(Collision collision)
+	public GameController gameController;
+
+	private void OnTriggerEnter(Collider collision)
 	{
-		if(collision.gameObject.tag == "Bullet")
+		if(collision.gameObject.tag == "Checkpoint")
 		{
-			Debug.Log("Die");
-			//Die();
+			Debug.Log("Checkpoint");	
+			Vector3 position = collision.gameObject.transform.position;
+			Vector3 rotation = new Vector3(0,0,0);
+
+			gameController.SetCheckpoint(position, rotation);
 		}
 	}
 }

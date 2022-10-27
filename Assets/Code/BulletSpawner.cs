@@ -8,10 +8,13 @@ public class BulletSpawner : MonoBehaviour
 	public List<GameObject> pooledBullets;
 	public GameObject bullet;
 	public int amountToPool;
+	public float maxRotation;
+	public float rotationSpeed;
 	public BulletMovement bulletMovement;
 	public ThirdPersonCamera player;
 	private float timer = 0;
 	private float speedRatio;
+	private float initialRotation;
 
 
 	// Start is called before the first frame update
@@ -25,16 +28,22 @@ public class BulletSpawner : MonoBehaviour
 		{
 			temp = Instantiate(bullet);
 			temp.SetActive(false);
-			temp.transform.parent = gameObject.transform;
 			pooledBullets.Add(temp);
 		}
 
 		speedRatio = bulletMovement.slowedSpeed / bulletMovement.movementSpeed;
+
+		initialRotation = transform.eulerAngles.y;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		float angle = Mathf.Sin(Time.time * rotationSpeed) * maxRotation;
+		angle += initialRotation;
+
+		transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
+
 		if (player.isSlowMo)
 		{
 			timer += Time.deltaTime * speedRatio;

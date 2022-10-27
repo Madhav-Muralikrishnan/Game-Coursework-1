@@ -11,6 +11,8 @@ public class ThirdPersonCamera : MonoBehaviour
 	public bool canSlowMo = false;
 	public double slowMoTimer;
 	public double slowMoTimerMax = 2;
+	public double regenSlowMoSpeed = 0.5;
+	public GameController gameController;
 
 	void Start()
 	{
@@ -22,6 +24,11 @@ public class ThirdPersonCamera : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (controller.velocity == Vector3.zero && slowMoTimer < slowMoTimerMax)
+		{
+			slowMoTimer += Time.deltaTime * regenSlowMoSpeed;
+		}
+
 		if (slowMoTimer != 0)
 		{
 			canSlowMo = true;
@@ -62,6 +69,12 @@ public class ThirdPersonCamera : MonoBehaviour
 		}
 
 		controller.Move(moveDirection * speed * Time.deltaTime);
+	}
+
+	public void Die()
+	{
+		Debug.Log("You Died!");
+		gameController.Respawn();
 	}
 
 }
