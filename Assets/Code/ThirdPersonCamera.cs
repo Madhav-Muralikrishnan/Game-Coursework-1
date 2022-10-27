@@ -64,4 +64,9 @@ public class ThirdPersonCamera : MonoBehaviour
 		controller.Move(moveDirection * speed * Time.deltaTime);
 	}
 
+	public void Die()
+	{
+		Debug.Log("die");
+	}
+
 }

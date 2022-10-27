@@ -6,13 +6,22 @@ public class BulletCollision : MonoBehaviour
 {
 	public int numCollisions;
 	public int maxCollisions;
+	private BulletMovement movement;
+	private ThirdPersonCamera player;
+
+	void Start()
+	{
+		movement = GetComponent<BulletMovement>();
+		player = movement.player;
+	}
+
 	private void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag == "Player")
 		{
-			Debug.LogWarning("Die");
+			player.Die();
 		}
-		var movement = GetComponent<BulletMovement>();
+
 		if (numCollisions < maxCollisions)
 		{			
 			if (collision.gameObject.tag == "Wall")
