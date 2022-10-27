@@ -7,12 +7,11 @@ public class BulletCollision : MonoBehaviour
 	public int numCollisions;
 	public int maxCollisions;
 	private BulletMovement movement;
-	private ThirdPersonCamera player;
+	public Player player;
 
 	void Start()
 	{
 		movement = GetComponent<BulletMovement>();
-		player = movement.player;
 	}
 
 	private void OnCollisionEnter(Collision collision)

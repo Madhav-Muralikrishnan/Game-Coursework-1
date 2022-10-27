@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
-    public ThirdPersonCamera player;
+    public Player player;
+    public float slowMoTimer;
+    public float slowMoTimerMax = 2;
+    public float regenSlowMoSpeed = 0.5f;
+    public bool isSlowMo = false;
     private Vector3 lastCheckPoint;
     private Vector3 lastCheckPointRotation;
     
     // Start is called before the first frame update
     void Start()
     {
+        slowMoTimer = slowMoTimerMax;
         SetCheckpoint(new Vector3(0,1,0), new Vector3(0,0,0));
     }
 

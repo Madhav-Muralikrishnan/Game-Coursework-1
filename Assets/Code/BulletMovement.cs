@@ -6,7 +6,7 @@ public class BulletMovement : MonoBehaviour
 {
 	public float movementSpeed = 5.0f;
 	public float slowedSpeed = 0.5f;
-	public ThirdPersonCamera player;
+	public GameController gameController;
 	private Rigidbody rigidBody;
 
 	// Start is called before the first frame update
@@ -20,7 +20,7 @@ public class BulletMovement : MonoBehaviour
 	void FixedUpdate()
 	{
 		rigidBody.velocity = Vector3.zero;
-		if(player.isSlowMo)
+		if(gameController.isSlowMo)
 		{
 			rigidBody.AddForce(transform.forward * slowedSpeed, ForceMode.Impulse);
 			return;

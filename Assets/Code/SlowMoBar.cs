@@ -5,20 +5,20 @@ using UnityEngine.UI;
 
 public class SlowMoBar : MonoBehaviour
 {
-	public ThirdPersonCamera player;
+	public GameController gameController;
 	public Image mask;
 	private float maximum;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		maximum = (float)player.slowMoTimerMax;
+		maximum = (float)gameController.slowMoTimerMax;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		var fillAmount = (float)player.slowMoTimer / (float)player.slowMoTimerMax;
+		var fillAmount = (float)gameController.slowMoTimer / (float)gameController.slowMoTimerMax;
 		mask.fillAmount = fillAmount;
 	}
 }
