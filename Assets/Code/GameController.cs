@@ -22,8 +22,9 @@ public class GameController : MonoBehaviour
 
     public void Respawn()
     {
-        player.gameObject.transform.position = lastCheckPoint;
-        player.gameObject.transform.eulerAngles = lastCheckPointRotation;
+        Debug.Log("Respawning to " + lastCheckPoint);
+        player.transform.position = lastCheckPoint;
+        player.transform.eulerAngles = lastCheckPointRotation;
     }
 
     public void SetCheckpoint(Vector3 checkPointPosition, Vector3 checkPointRotation)
