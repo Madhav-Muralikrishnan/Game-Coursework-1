@@ -4955,8 +4955,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1921750349}
     - target: {fileID: 2833714811085492268, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
+      propertyPath: maxRotation
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833714811085492268, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: amountToPool
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2833714811085492268, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
+      propertyPath: rotationSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2833714811085492269, guid: 6a814ebd83ed6b24d847085c84666617, type: 3}
       propertyPath: m_Name
