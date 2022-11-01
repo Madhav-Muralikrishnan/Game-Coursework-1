@@ -11,7 +11,7 @@ public class BulletSpawner : MonoBehaviour
 	public float maxRotation;
 	public float rotationSpeed;
 	public BulletMovement bulletMovement;
-	public ThirdPersonCamera player;
+	public GameController gameController;
 	private float timer = 0;
 	private float speedRatio;
 	private float initialRotation;
@@ -44,7 +44,7 @@ public class BulletSpawner : MonoBehaviour
 
 		transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
 
-		if (player.isSlowMo)
+		if (gameController.isSlowMo)
 		{
 			timer += Time.deltaTime * speedRatio;
 		}
