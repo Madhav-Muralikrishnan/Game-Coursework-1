@@ -8,6 +8,9 @@ public class Camera : MonoBehaviour
     public Player player;
     public float multiplierUp = 5f;
     public float multiplierLeftRight = 10f;
+    private float mouseX; 
+    private float mouseY;
+    public float cameraVerticalRotation = 0f;
 
 	// Start is called before the first frame update
 	void Start()
@@ -17,11 +20,13 @@ public class Camera : MonoBehaviour
 
 	private void Update()
     {
-        var mouseX = Input.GetAxisRaw("Mouse X");
-        var mouseY = Input.GetAxisRaw("Mouse Y");
+        mouseX = Input.GetAxisRaw("Mouse X") * multiplierLeftRight;
+        mouseY = Input.GetAxisRaw("Mouse Y") * multiplierUp;
 
-        player.transform.Rotate(new Vector3(0f, mouseX * multiplierLeftRight, 0f));
-        transform.Rotate(new Vector3(-Mathf.Clamp(mouseY * multiplierUp, -90f, 90f), 0f, 0f));
+        cameraVerticalRotation -= mouseY;
+        cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, -90f, 90f);
+        transform.localEulerAngles = Vector3.right * cameraVerticalRotation;
+        player.transform.Rotate(Vector3.up * mouseX);
     }
 
 }
