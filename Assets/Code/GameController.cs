@@ -11,6 +11,9 @@ public class GameController : MonoBehaviour
     public bool isSlowMo = false;
     private Vector3 lastCheckPoint;
     private Vector3 lastCheckPointRotation;
+    private int numDeaths = 0;
+    private float timer = 0;
+    private int seconds = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -22,7 +25,8 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        seconds = (int) timer % 60;
     }
 
     public void Respawn()
@@ -36,5 +40,10 @@ public class GameController : MonoBehaviour
     {
         lastCheckPoint = checkPointPosition;
         lastCheckPointRotation = checkPointRotation;
+    }
+
+    public void AddToDeathCounter()
+    {
+        numDeaths++;
     }
 }
