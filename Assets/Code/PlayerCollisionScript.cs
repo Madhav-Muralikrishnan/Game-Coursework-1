@@ -5,6 +5,12 @@ using UnityEngine;
 public class PlayerCollisionScript : MonoBehaviour
 {
 	public GameController gameController;
+	private Player player;
+
+	void Start()
+	{
+		player = GetComponent<Player>();
+	}
 
 	private void OnTriggerEnter(Collider collision)
 	{
@@ -20,6 +26,32 @@ public class PlayerCollisionScript : MonoBehaviour
 		{
 			Debug.Log("Finish");	
 			gameController.Finish();
+		}
+		else if(collision.gameObject.tag == "PowerUp1")
+		{
+			//Remove some slow mo and destroy bullets in area
+			if (gameController.slowMoTimer - 1 > 0)
+			{
+				gameController.slowMoTimer -= 1;
+			}
+			else
+			{
+				gameController.slowMoTimer = 0;
+			}
+			
+			// gameController.destroyInCapsule = true;
+
+			Collider[] colliders = Physics.OverlapSphere(transform.position, 20);
+
+			foreach (Collider collider in colliders)
+			{
+				Debug.Log(collider?.gameObject?.tag);
+				if (collider?.gameObject?.tag == "Bullet")
+				{
+					Debug.Log("Bullet set false");
+					collider.gameObject.SetActive(false);
+				}
+			}
 		}
 	}
 }
