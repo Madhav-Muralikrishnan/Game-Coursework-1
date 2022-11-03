@@ -58,6 +58,7 @@ public class PlayerCollisionScript : MonoBehaviour
 			Debug.Log("Hit PowerUp2");
 			Destroy(collision.gameObject);
 			gameController.powerUp2Active = true;
+			gameController.slowMoTimer += 0.1f;
 			StartCoroutine(PowerUp2Ending());
 		}
 		else if(collision.gameObject.tag == "PowerUp3")
