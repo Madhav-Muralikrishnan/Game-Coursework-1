@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public float slowMoTimerMax = 2;
     public float regenSlowMoSpeed = 0.5f;
     public bool isSlowMo = false;
+    public AudioSource heartBeatSound;
     private Vector3 lastCheckPoint;
     private Vector3 lastCheckPointRotation;
     private int numDeaths = 0;
@@ -39,6 +40,7 @@ public class GameController : MonoBehaviour
         if (prevHeartBeats < totalHeartBeats)
         {
             //Play heartbeat audio
+            heartBeatSound.Play();
         }
 
         prevHeartBeats = totalHeartBeats;
