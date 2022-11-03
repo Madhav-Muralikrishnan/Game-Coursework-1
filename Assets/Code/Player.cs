@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
 	private void Update()
     {
-        var isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
+        isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
         moving = false;
         KeyPressUpdate();
         SlowMoUpdate();
