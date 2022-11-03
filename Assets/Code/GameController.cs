@@ -65,4 +65,9 @@ public class GameController : MonoBehaviour
     {
         numDeaths++;
     }
+
+    public void Finish()
+    {
+        Debug.Log("Finish");
+    }
 }

@@ -16,5 +16,10 @@ public class PlayerCollisionScript : MonoBehaviour
 
 			gameController.SetCheckpoint(position, rotation);
 		}
+		else if(collision.gameObject.tag == "Finish")
+		{
+			Debug.Log("Finish");	
+			gameController.Finish();
+		}
 	}
 }
