@@ -58,14 +58,29 @@ public class PlayerCollisionScript : MonoBehaviour
 			Debug.Log("Hit PowerUp2");
 			Destroy(collision.gameObject);
 			gameController.powerUp2Active = true;
-			StartCoroutine(Wait());
+			StartCoroutine(PowerUp2Ending());
+		}
+		else if(collision.gameObject.tag == "PowerUp3")
+		{
+			//Movement speed doubles
+			Debug.Log("Hit PowerUp3");
+			Destroy(collision.gameObject);
+			player.movementSpeed = player.movementSpeed * 2;
+			StartCoroutine(PowerUp3Ending());
 		}
 	}
 
-	private IEnumerator Wait()
+	private IEnumerator PowerUp2Ending()
 	{
 		yield return new WaitForSeconds(3);
 		gameController.powerUp2Active = false;
 		Debug.Log("PowerUp2 Ended");
+	}
+
+	private IEnumerator PowerUp3Ending()
+	{
+		yield return new WaitForSeconds(3);
+		player.movementSpeed = player.movementSpeed / 2;
+		Debug.Log("PowerUp3 Ended");
 	}
 }
