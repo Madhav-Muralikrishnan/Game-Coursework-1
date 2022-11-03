@@ -11,6 +11,10 @@ public class Player : MonoBehaviour
     private float playerHeight = 2f;
     private bool moving = false;
 
+    public float groundDrag = 6f;
+    public float airDrag = 2f;
+    bool isGrounded;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -19,39 +23,40 @@ public class Player : MonoBehaviour
 
 	private void Update()
     {
+        var isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
         moving = false;
         KeyPressUpdate();
         SlowMoUpdate();
+        ControlDrag();
     }
 
     private void KeyPressUpdate()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.position += transform.forward * movementSpeed * Time.deltaTime;
+            rigidBody.velocity += transform.forward * movementSpeed * Time.deltaTime;
             moving = true;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.position -= transform.forward * movementSpeed * Time.deltaTime;
+            rigidBody.velocity -= transform.forward * movementSpeed * Time.deltaTime;
             moving = true;
         }
 
         if (Input.GetKey(KeyCode.D))
         {
-            transform.position += transform.right * movementSpeed * Time.deltaTime;
+            rigidBody.velocity += transform.right * movementSpeed * Time.deltaTime;
             moving = true;
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.position -= transform.right * movementSpeed * Time.deltaTime;
+            rigidBody.velocity -= transform.right * movementSpeed * Time.deltaTime;
             moving = true;
         }
 
-        var isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
-            rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             moving = true;
         }
     }
@@ -86,6 +91,24 @@ public class Player : MonoBehaviour
 	{
 		Debug.Log("You Died!");
 		gameController.Respawn();
+	}
+
+    void ControlDrag()
+    {
+        if(isGrounded){
+            rigidBody.drag = groundDrag;
+        }
+        else
+        {
+           rigidBody.drag = airDrag; 
+        }
+    }
+
+    void OnCollisionEnter(Collision collider)
+	{
+		if(collider.gameObject.tag == "Wall"){
+			rigidBody.velocity = Vector3.zero;
+		}
 	}
 }
 //using System.Collections;
