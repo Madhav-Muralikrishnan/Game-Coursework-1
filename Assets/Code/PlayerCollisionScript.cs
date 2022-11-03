@@ -29,6 +29,8 @@ public class PlayerCollisionScript : MonoBehaviour
 		}
 		else if(collision.gameObject.tag == "PowerUp1")
 		{
+			Debug.Log("Hit PowerUp1");
+
 			//Remove some slow mo and destroy bullets in area
 			if (gameController.slowMoTimer - 1 > 0)
 			{
@@ -48,10 +50,13 @@ public class PlayerCollisionScript : MonoBehaviour
 					collider.gameObject.SetActive(false);
 				}
 			}
+			Destroy(collision.gameObject);
 		}
 		else if(collision.gameObject.tag == "PowerUp2")
 		{
 			//Stop slow mo bar decreasing for amount of time
+			Debug.Log("Hit PowerUp2");
+			Destroy(collision.gameObject);
 			gameController.powerUp2Active = true;
 			StartCoroutine(Wait());
 		}
@@ -61,5 +66,6 @@ public class PlayerCollisionScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3);
 		gameController.powerUp2Active = false;
+		Debug.Log("PowerUp2 Ended");
 	}
 }
