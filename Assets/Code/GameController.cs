@@ -19,7 +19,6 @@ public class GameController : MonoBehaviour
     private float timer = 0;
     private float timerWhenSlowMultiplier = 1;
     private int totalHeartBeats = 0;
-    private int prevHeartBeats = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -36,17 +35,17 @@ public class GameController : MonoBehaviour
         if (isSlowMo)
             timer += Time.deltaTime * timerWhenSlowMultiplier;
 
-        totalHeartBeats = (int) timer % 60;
-
-        if (prevHeartBeats < totalHeartBeats)
+        if (timer >= 1)
         {
+            totalHeartBeats++;
+            timer = 0;
+
             //Play heartbeat audio
             heartBeatSound.Play();
+
+            heartbeatText.text = totalHeartBeats.ToString();
         }
 
-        prevHeartBeats = totalHeartBeats;
-
-        heartbeatText.text = totalHeartBeats.ToString();
     }
 
     public void Respawn()
