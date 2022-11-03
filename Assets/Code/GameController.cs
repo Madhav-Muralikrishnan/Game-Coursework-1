@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         slowMoTimer = slowMoTimerMax;
-        SetCheckpoint(new Vector3(0,1,0), new Vector3(0,0,0));
+        SetCheckpoint(new Vector3(-5,1,-7), new Vector3(0,0,0));
     }
 
     // Update is called once per frame
