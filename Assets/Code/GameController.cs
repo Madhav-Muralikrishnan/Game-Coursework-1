@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public float regenSlowMoSpeed = 0.5f;
     public bool isSlowMo = false;
     public AudioSource heartBeatSound;
+    public bool powerUp2Active = false;
     private Vector3 lastCheckPoint;
     private Vector3 lastCheckPointRotation;
     private int numDeaths = 0;

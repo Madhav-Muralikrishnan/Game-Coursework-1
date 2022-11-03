@@ -53,5 +53,18 @@ public class PlayerCollisionScript : MonoBehaviour
 				}
 			}
 		}
+		else if(collision.gameObject.tag == "PowerUp2")
+		{
+			Debug.Log("Powerup hit");
+			gameController.powerUp2Active = true;
+			StartCoroutine(Wait());
+		}
+	}
+
+	private IEnumerator Wait()
+	{
+		yield return new WaitForSeconds(3);
+		Debug.Log("Powerup ended");
+		gameController.powerUp2Active = false;
 	}
 }

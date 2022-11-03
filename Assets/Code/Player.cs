@@ -74,7 +74,9 @@ public class Player : MonoBehaviour
 
 			if (gameController.isSlowMo)
 			{
-				gameController.slowMoTimer -= Time.deltaTime;
+                if (!gameController.powerUp2Active)
+				    gameController.slowMoTimer -= Time.deltaTime;
+
 				if (gameController.slowMoTimer < 0)
 				{
 					gameController.slowMoTimer = 0;
