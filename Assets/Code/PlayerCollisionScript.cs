@@ -39,23 +39,19 @@ public class PlayerCollisionScript : MonoBehaviour
 				gameController.slowMoTimer = 0;
 			}
 			
-			// gameController.destroyInCapsule = true;
-
 			Collider[] colliders = Physics.OverlapSphere(transform.position, 20);
 
 			foreach (Collider collider in colliders)
 			{
-				Debug.Log(collider?.gameObject?.tag);
 				if (collider?.gameObject?.tag == "Bullet")
 				{
-					Debug.Log("Bullet set false");
 					collider.gameObject.SetActive(false);
 				}
 			}
 		}
 		else if(collision.gameObject.tag == "PowerUp2")
 		{
-			Debug.Log("Powerup hit");
+			//Stop slow mo bar decreasing for amount of time
 			gameController.powerUp2Active = true;
 			StartCoroutine(Wait());
 		}
@@ -64,7 +60,6 @@ public class PlayerCollisionScript : MonoBehaviour
 	private IEnumerator Wait()
 	{
 		yield return new WaitForSeconds(3);
-		Debug.Log("Powerup ended");
 		gameController.powerUp2Active = false;
 	}
 }
