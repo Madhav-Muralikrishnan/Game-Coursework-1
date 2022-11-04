@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 	public float movementSpeed = 5;
 	public float jumpForce = 1f;
 	public GameController gameController;
+	public AudioSource deathSound;
 	private Rigidbody rigidBody;
 	private float playerHeight = 2f;
 	private bool moving = false;
@@ -92,6 +93,7 @@ public class Player : MonoBehaviour
 	public void Die()
 	{
 		Debug.Log("You Died!");
+		deathSound.Play();
 		gameController.Respawn();
 	}
 
