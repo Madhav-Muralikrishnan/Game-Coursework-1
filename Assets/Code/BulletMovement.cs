@@ -6,12 +6,13 @@ public class BulletMovement : MonoBehaviour
 {
 	public float movementSpeed = 5.0f;
 	public float slowedSpeed = 0.5f;
-	public GameController gameController;
+	private GameController gameController;
 	private Rigidbody rigidBody;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		gameController = FindObjectOfType<GameController>();
 		rigidBody = GetComponent<Rigidbody>();
 		rigidBody.AddForce(transform.forward * movementSpeed);
 	}

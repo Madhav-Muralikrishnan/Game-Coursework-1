@@ -10,8 +10,8 @@ public class BulletSpawner : MonoBehaviour
 	public int amountToPool;
 	public float maxRotation;
 	public float rotationSpeed;
-	public BulletMovement bulletMovement;
-	public GameController gameController;
+	private BulletMovement bulletMovement;
+	private GameController gameController;
 	private float timer = 0;
 	private float speedRatio;
 	private float initialRotation;
@@ -20,6 +20,9 @@ public class BulletSpawner : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		bulletMovement = bullet.GetComponent<BulletMovement>();
+		gameController = FindObjectOfType<GameController>();
+
 		timer = 0;
 
 		pooledBullets = new List<GameObject>();

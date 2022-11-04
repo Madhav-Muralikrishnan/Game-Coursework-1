@@ -7,10 +7,11 @@ public class BulletCollision : MonoBehaviour
 	public int numCollisions;
 	public int maxCollisions;
 	private BulletMovement movement;
-	public Player player;
+	private Player player;
 
 	void Start()
 	{
+		player = FindObjectOfType<Player>();
 		movement = GetComponent<BulletMovement>();
 	}
 

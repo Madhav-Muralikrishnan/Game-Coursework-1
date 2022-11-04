@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PlayerCollisionScript : MonoBehaviour
 {
-	public GameController gameController;
+	private GameController gameController;
 	private Player player;
 
 	void Start()
 	{
 		player = GetComponent<Player>();
+		gameController = FindObjectOfType<GameController>();
 	}
 
 	private void OnTriggerEnter(Collider collision)
