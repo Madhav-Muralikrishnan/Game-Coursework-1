@@ -1,5 +1,0 @@
-Camera camera
-
-when move mouse, in direction, rotate player direction too
-have camera as child of player so moves with it
-then movement uses transform.forward
