@@ -70,6 +70,18 @@ public class PlayerCollisionScript : MonoBehaviour
 			player.movementSpeed = player.movementSpeed * 2;
 			StartCoroutine(PowerUp3Ending());
 		}
+		else if(collision.gameObject.tag == "Key1")
+		{
+			Debug.Log("Key1 collected");
+			Destroy(collision.gameObject);
+			gameController.Key1();
+		}
+		else if(collision.gameObject.tag == "Key2")
+		{
+			Debug.Log("Key2 collected");
+			Destroy(collision.gameObject);
+			gameController.Key2();
+		}
 	}
 
 	private IEnumerator PowerUp2Ending()

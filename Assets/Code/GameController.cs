@@ -13,12 +13,15 @@ public class GameController : MonoBehaviour
     public bool isSlowMo = false;
     public AudioSource heartBeatSound;
     public bool powerUp2Active = false;
+    public GameObject door1;
+    public GameObject door2;
     private Vector3 lastCheckPoint;
     private Vector3 lastCheckPointRotation;
     private int numDeaths = 0;
     private float timer = 0;
     private float timerWhenSlowMultiplier = 1;
     private int totalHeartBeats = 0;
+    private int key2sCollected = 0;
     
     // Start is called before the first frame update
     void Start()
@@ -69,5 +72,18 @@ public class GameController : MonoBehaviour
     public void Finish()
     {
         Debug.Log("Finish");
+    }
+
+    public void Key1()
+    {
+        door1.SetActive(false);
+    }
+
+    public void Key2()
+    {
+        key2sCollected++;
+
+        if (key2sCollected >= 4)
+            door2.SetActive(false);
     }
 }
