@@ -6,15 +6,13 @@ public class Player : MonoBehaviour
 {
 	public float movementSpeed = 5;
 	public float jumpForce = 1f;
+	public float jumpGravity = 7f;
 	public AudioSource deathSound;
 	private GameController gameController;
 	private Rigidbody rigidBody;
 	private float playerHeight = 2f;
 	private bool moving = false;
-
-	public float groundDrag = 6f;
-	public float airDrag = 2f;
-	bool isGrounded;
+	private bool isGrounded;
 
 	// Start is called before the first frame update
 	void Start()
@@ -98,12 +96,10 @@ public class Player : MonoBehaviour
 		gameController.Respawn();
 	}
 
-	void ControlDrag()
+	private void ControlDrag()
 	{
-		rigidBody.drag = groundDrag;
-
-		if(!isGrounded){
-			rigidBody.AddForce(Vector3.down * 4.5f, ForceMode.Acceleration);
+		if(rigidBody.velocity.y < 0){
+			rigidBody.AddForce(Vector3.down * jumpGravity, ForceMode.Acceleration);
 		}
 	}
 

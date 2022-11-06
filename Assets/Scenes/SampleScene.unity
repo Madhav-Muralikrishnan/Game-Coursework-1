@@ -7583,12 +7583,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 42758098}
     - target: {fileID: 7702357066016363357, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
+      propertyPath: jumpForce
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702357066016363357, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
       propertyPath: deathSound
       value: 
       objectReference: {fileID: 93304363}
     - target: {fileID: 7702357066016363357, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
       propertyPath: groundDrag
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702357066016363357, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
+      propertyPath: jumpGravity
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702357066016363357, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
+      propertyPath: movementSpeed
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 7702357066016363357, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
       propertyPath: gameController
@@ -7641,6 +7653,10 @@ PrefabInstance:
     - target: {fileID: 7702357066170928635, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702357066170928638, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
+      propertyPath: m_Drag
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7702357066170928624, guid: 2be0d70d75a14ae488419823d0369165, type: 3}
