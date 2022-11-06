@@ -11,6 +11,8 @@ TagManager:
   - PowerUp1
   - PowerUp2
   - PowerUp3
+  - Key1
+  - Key2
   layers:
   - Default
   - TransparentFX
