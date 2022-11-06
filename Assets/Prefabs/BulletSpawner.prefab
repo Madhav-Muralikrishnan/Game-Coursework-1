@@ -48,8 +48,7 @@ MonoBehaviour:
   pooledBullets: []
   bullet: {fileID: 3009230849025195590, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
   amountToPool: 0
-  minRotation: 0
-  maxRotation: 90
-  rotationSpeed: 1
-  bulletMovement: {fileID: 3009230849025195593, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
-  player: {fileID: 0}
+  maxRotation: 0
+  rotationSpeed: 0
+  maxHeight: 2.5
+  verticalSpeed: 0

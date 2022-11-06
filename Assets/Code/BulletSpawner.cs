@@ -5,16 +5,19 @@ using UnityEngine;
 public class BulletSpawner : MonoBehaviour
 {
 	public float delayBetweenShoot = 1.0f;
-	public List<GameObject> pooledBullets;
 	public GameObject bullet;
 	public int amountToPool;
 	public float maxRotation;
 	public float rotationSpeed;
+	public float maxHeight;
+	public float verticalSpeed;
+	private List<GameObject> pooledBullets;
 	private BulletMovement bulletMovement;
 	private GameController gameController;
 	private float timer = 0;
 	private float speedRatio;
 	private float initialRotation;
+	private float initialHeight;
 
 
 	// Start is called before the first frame update
@@ -37,6 +40,7 @@ public class BulletSpawner : MonoBehaviour
 		speedRatio = bulletMovement.slowedSpeed / bulletMovement.movementSpeed;
 
 		initialRotation = transform.eulerAngles.y;
+		initialHeight = transform.position.y;
 	}
 
 	// Update is called once per frame
@@ -46,6 +50,11 @@ public class BulletSpawner : MonoBehaviour
 		angle += initialRotation;
 
 		transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
+
+		float height = Mathf.Sin(Time.time * verticalSpeed) * maxHeight;
+		height += initialHeight;
+
+		transform.position = new Vector3(transform.position.x, height, transform.position.z);
 
 		if (gameController.isSlowMo)
 		{
