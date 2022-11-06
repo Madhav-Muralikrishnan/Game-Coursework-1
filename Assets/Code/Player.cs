@@ -21,9 +21,19 @@ public class Player : MonoBehaviour
 		rigidBody = GetComponent<Rigidbody>();
 	}
 
-	private void FixedUpdate()
+	private void Update()
 	{
 		isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
+		
+		if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+		{
+			rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+			moving = true;
+		}
+	}
+
+	private void FixedUpdate()
+	{
 		moving = false;
 		KeyPressUpdate();
 		SlowMoUpdate();
@@ -51,12 +61,6 @@ public class Player : MonoBehaviour
 		if (Input.GetKey(KeyCode.A))
 		{
 			rigidBody.velocity -= transform.right * movementSpeed * Time.deltaTime;
-			moving = true;
-		}
-
-		if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-		{
-			rigidBody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
 			moving = true;
 		}
 	}
