@@ -74,7 +74,7 @@ public class Player : MonoBehaviour
 
 		if (gameController.slowMoTimer != 0)
 		{
-			gameController.isSlowMo = Input.GetKey(KeyCode.Mouse0) && gameController.leftClick;
+			gameController.isSlowMo = Input.GetKey(KeyCode.Mouse0);// && gameController.leftClick;
 
 			if (gameController.isSlowMo)
 			{
