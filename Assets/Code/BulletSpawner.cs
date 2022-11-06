@@ -11,6 +11,8 @@ public class BulletSpawner : MonoBehaviour
 	public float rotationSpeed;
 	public float maxHeight;
 	public float verticalSpeed;
+	public float maxHorizontal;
+	public float horizontalSpeed;
 	private List<GameObject> pooledBullets;
 	private BulletMovement bulletMovement;
 	private GameController gameController;
@@ -18,6 +20,7 @@ public class BulletSpawner : MonoBehaviour
 	private float speedRatio;
 	private float initialRotation;
 	private float initialHeight;
+	private float initialHorizontal;
 
 
 	// Start is called before the first frame update
@@ -41,20 +44,13 @@ public class BulletSpawner : MonoBehaviour
 
 		initialRotation = transform.eulerAngles.y;
 		initialHeight = transform.position.y;
+		initialHorizontal = transform.position.x;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		float angle = Mathf.Sin(Time.time * rotationSpeed) * maxRotation;
-		angle += initialRotation;
-
-		transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
-
-		float height = Mathf.Sin(Time.time * verticalSpeed) * maxHeight;
-		height += initialHeight;
-
-		transform.position = new Vector3(transform.position.x, height, transform.position.z);
+		Movement();
 
 		if (gameController.isSlowMo)
 		{
@@ -94,5 +90,20 @@ public class BulletSpawner : MonoBehaviour
 			}
 		}
 		return null;
+	}
+
+	private void Movement()
+	{
+		float angle = Mathf.Sin(Time.time * rotationSpeed) * maxRotation;
+		angle += initialRotation;
+
+		float height = Mathf.Sin(Time.time * verticalSpeed) * maxHeight;
+		height += initialHeight;
+
+		float horiz = Mathf.Sin(Time.time * horizontalSpeed) * maxHorizontal;
+		horiz += initialHorizontal;
+
+		transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
+		transform.position = new Vector3(horiz, height, transform.position.z);
 	}
 }
