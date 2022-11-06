@@ -13,83 +13,94 @@ public class PlayerCollisionScript : MonoBehaviour
 		gameController = FindObjectOfType<GameController>();
 	}
 
-	private void OnTriggerEnter(Collider collision)
+	private void OnTriggerEnter(Collider collider)
 	{
-		if(collision.gameObject.tag == "Checkpoint")
+		if(collider.gameObject.tag == "Checkpoint")
 		{
-			Debug.Log("Checkpoint");	
-			Vector3 position = collision.gameObject.transform.position;
-			Vector3 rotation = new Vector3(0,0,0);
-
-			gameController.SetCheckpoint(position, rotation);
+			Checkpoint(collider);
 		}
-		else if(collision.gameObject.tag == "Finish")
+		else if(collider.gameObject.tag == "Finish")
 		{
 			Debug.Log("Finish");	
 			gameController.Finish();
 		}
-		else if(collision.gameObject.tag == "PowerUp1")
+		else if(collider.gameObject.tag == "PowerUp1")
 		{
-			Debug.Log("Hit PowerUp1");
-
-			//Remove some slow mo and destroy bullets in area
-			if (gameController.slowMoTimer - 1 > 0)
-			{
-				gameController.slowMoTimer -= 1;
-			}
-			else
-			{
-				gameController.slowMoTimer = 0;
-			}
-			
-			Collider[] colliders = Physics.OverlapSphere(transform.position, 20);
-
-			foreach (Collider collider in colliders)
-			{
-				if (collider?.gameObject?.tag == "Bullet")
-				{
-					collider.gameObject.SetActive(false);
-				}
-			}
-			Destroy(collision.gameObject);
+			PowerUp1(collider);
 		}
-		else if(collision.gameObject.tag == "PowerUp2")
+		else if(collider.gameObject.tag == "PowerUp2")
 		{
-			//Stop slow mo bar decreasing for amount of time
-			Debug.Log("Hit PowerUp2");
-			Destroy(collision.gameObject);
-			gameController.powerUp2Active = true;
-			gameController.slowMoTimer += 0.1f;
-			StartCoroutine(PowerUp2Ending());
+			PowerUp2(collider);
 		}
-		else if(collision.gameObject.tag == "PowerUp3")
+		else if(collider.gameObject.tag == "PowerUp3")
 		{
-			//Movement speed doubles
-			Debug.Log("Hit PowerUp3");
-			Destroy(collision.gameObject);
-			player.movementSpeed = player.movementSpeed * 2;
-			StartCoroutine(PowerUp3Ending());
+			PowerUp3(collider);
 		}
-		else if(collision.gameObject.tag == "Key1")
+		else if(collider.gameObject.tag == "Key1")
 		{
 			Debug.Log("Key1 collected");
-			Destroy(collision.gameObject);
+			Destroy(collider.gameObject);
 			gameController.Key1();
 		}
-		else if(collision.gameObject.tag == "Key2")
+		else if(collider.gameObject.tag == "Key2")
 		{
 			Debug.Log("Key2 collected");
-			Destroy(collision.gameObject);
+			Destroy(collider.gameObject);
 			gameController.Key2();
 		}
-		else if(collision.gameObject.tag == "LeftClickZone")
+		else if(collider.gameObject.tag == "LeftClickZone")
 		{
 			gameController.leftClick = true;
 		}
-		else if(collision.gameObject.tag == "SlowMoZone")
+		else if(collider.gameObject.tag == "SlowMoZone")
 		{
 			gameController.ActivateSlowMoBar();
 		}
+	}
+
+	private void Checkpoint(Collider collider)
+	{
+		Debug.Log("Checkpoint");	
+		Vector3 position = collider.gameObject.transform.position;
+		Vector3 rotation = new Vector3(0,0,0);
+
+		gameController.SetCheckpoint(position, rotation);
+	}
+
+	private void PowerUp1(Collider collision)
+	{
+		Debug.Log("Hit PowerUp1");
+
+		//Remove some slow mo and destroy bullets in area
+		if (gameController.slowMoTimer - 1 > 0)
+		{
+			gameController.slowMoTimer -= 1;
+		}
+		else
+		{
+			gameController.slowMoTimer = 0;
+		}
+		
+		Collider[] colliders = Physics.OverlapSphere(transform.position, 20);
+
+		foreach (Collider collider in colliders)
+		{
+			if (collider?.gameObject?.tag == "Bullet")
+			{
+				collider.gameObject.SetActive(false);
+			}
+		}
+		Destroy(collision.gameObject);
+	}
+
+	private void PowerUp2(Collider collider)
+	{
+		//Stop slow mo bar decreasing for amount of time
+		Debug.Log("Hit PowerUp2");
+		Destroy(collider.gameObject);
+		gameController.powerUp2Active = true;
+		gameController.slowMoTimer += 0.1f;
+		StartCoroutine(PowerUp2Ending());
 	}
 
 	private IEnumerator PowerUp2Ending()
@@ -97,6 +108,15 @@ public class PlayerCollisionScript : MonoBehaviour
 		yield return new WaitForSeconds(3);
 		gameController.powerUp2Active = false;
 		Debug.Log("PowerUp2 Ended");
+	}
+
+	private void PowerUp3(Collider collider)
+	{
+		//Movement speed doubles
+		Debug.Log("Hit PowerUp3");
+		Destroy(collider.gameObject);
+		player.movementSpeed = player.movementSpeed * 2;
+		StartCoroutine(PowerUp3Ending());
 	}
 
 	private IEnumerator PowerUp3Ending()
