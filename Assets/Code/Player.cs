@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
 		rigidBody = GetComponent<Rigidbody>();
 	}
 
-	private void Update()
+	private void FixedUpdate()
 	{
 		isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
 		moving = false;
