@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
     public float regenSlowMoSpeed = 0.5f;
     public bool isSlowMo = false;
     public AudioSource heartBeatSound;
+    public AudioSource doorSound;
     public bool powerUp2Active = false;
     public GameObject door1;
     public GameObject door2;
@@ -77,6 +78,7 @@ public class GameController : MonoBehaviour
     public void Key1()
     {
         door1.SetActive(false);
+        doorSound.Play();
     }
 
     public void Key2()
@@ -84,6 +86,9 @@ public class GameController : MonoBehaviour
         key2sCollected++;
 
         if (key2sCollected >= 4)
+        {
             door2.SetActive(false);
+            doorSound.Play();
+        }
     }
 }
