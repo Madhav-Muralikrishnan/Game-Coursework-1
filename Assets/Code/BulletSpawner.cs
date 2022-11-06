@@ -16,6 +16,7 @@ public class BulletSpawner : MonoBehaviour
 	private List<GameObject> pooledBullets;
 	private BulletMovement bulletMovement;
 	private GameController gameController;
+	private float spawnTimer = 0;
 	private float timer = 0;
 	private float speedRatio;
 	private float initialRotation;
@@ -28,8 +29,6 @@ public class BulletSpawner : MonoBehaviour
 	{
 		bulletMovement = bullet.GetComponent<BulletMovement>();
 		gameController = FindObjectOfType<GameController>();
-
-		timer = 0;
 
 		pooledBullets = new List<GameObject>();
 		GameObject temp;
@@ -50,18 +49,20 @@ public class BulletSpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		Movement();
-
 		if (gameController.isSlowMo)
 		{
+			spawnTimer += Time.deltaTime * speedRatio;
 			timer += Time.deltaTime * speedRatio;
 		}
 		else
 		{
+			spawnTimer += Time.deltaTime;
 			timer += Time.deltaTime;
 		}
 
-		if (timer >= delayBetweenShoot)
+		Movement();
+
+		if (spawnTimer >= delayBetweenShoot)
 		{
 			Spawn();
 		}
@@ -77,7 +78,7 @@ public class BulletSpawner : MonoBehaviour
 			bullet.SetActive(true);
 		}
 
-		timer = 0;
+		spawnTimer = 0;
 	}
 
 	GameObject GetObject()
@@ -94,13 +95,13 @@ public class BulletSpawner : MonoBehaviour
 
 	private void Movement()
 	{
-		float angle = Mathf.Sin(Time.time * rotationSpeed) * maxRotation;
+		float angle = Mathf.Sin(timer * rotationSpeed) * maxRotation;
 		angle += initialRotation;
 
-		float height = Mathf.Sin(Time.time * verticalSpeed) * maxHeight;
+		float height = Mathf.Sin(timer * verticalSpeed) * maxHeight;
 		height += initialHeight;
 
-		float horiz = Mathf.Sin(Time.time * horizontalSpeed) * maxHorizontal;
+		float horiz = Mathf.Sin(timer * horizontalSpeed) * maxHorizontal;
 		horiz += initialHorizontal;
 
 		transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
