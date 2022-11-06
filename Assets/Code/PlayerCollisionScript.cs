@@ -82,6 +82,14 @@ public class PlayerCollisionScript : MonoBehaviour
 			Destroy(collision.gameObject);
 			gameController.Key2();
 		}
+		else if(collision.gameObject.tag == "LeftClickZone")
+		{
+			gameController.leftClick = true;
+		}
+		else if(collision.gameObject.tag == "SlowMoZone")
+		{
+			gameController.ActivateSlowMoBar();
+		}
 	}
 
 	private IEnumerator PowerUp2Ending()

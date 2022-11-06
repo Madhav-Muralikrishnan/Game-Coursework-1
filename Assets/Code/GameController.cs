@@ -6,16 +6,19 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
     public Player player;
+    public GameObject door1;
+    public GameObject door2;
+    public GameObject slowMoBar;
+    public AudioSource heartBeatSound;
+    public AudioSource doorSound;
     public Text heartbeatText;
     public float slowMoTimer;
     public float slowMoTimerMax = 2;
     public float regenSlowMoSpeed = 0.5f;
     public bool isSlowMo = false;
-    public AudioSource heartBeatSound;
-    public AudioSource doorSound;
     public bool powerUp2Active = false;
-    public GameObject door1;
-    public GameObject door2;
+    public bool leftClick = false;
+
     private Vector3 lastCheckPoint;
     private Vector3 lastCheckPointRotation;
     private int numDeaths = 0;
@@ -90,5 +93,10 @@ public class GameController : MonoBehaviour
             door2.SetActive(false);
             doorSound.Play();
         }
+    }
+
+    public void ActivateSlowMoBar()
+    {
+        slowMoBar.SetActive(true);
     }
 }
