@@ -100,12 +100,10 @@ public class Player : MonoBehaviour
 
 	void ControlDrag()
 	{
-		if(isGrounded){
-			rigidBody.drag = groundDrag;
-		}
-		else
-		{
-			rigidBody.drag = airDrag; 
+		rigidBody.drag = groundDrag;
+
+		if(!isGrounded){
+			rigidBody.AddForce(Vector3.down * 4.5f, ForceMode.Acceleration);
 		}
 	}
 
