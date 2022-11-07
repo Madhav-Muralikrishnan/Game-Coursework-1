@@ -13,6 +13,8 @@ TagManager:
   - PowerUp3
   - Key1
   - Key2
+  - LeftClickZone
+  - SlowMoZone
   layers:
   - Default
   - TransparentFX

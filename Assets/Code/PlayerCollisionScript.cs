@@ -50,10 +50,12 @@ public class PlayerCollisionScript : MonoBehaviour
 		}
 		else if(collider.gameObject.tag == "LeftClickZone")
 		{
+			Debug.Log("Left click zone passed");
 			gameController.leftClick = true;
 		}
 		else if(collider.gameObject.tag == "SlowMoZone")
 		{
+			Debug.Log("Slow mo zone passed");
 			gameController.ActivateSlowMoBar();
 		}
 	}
