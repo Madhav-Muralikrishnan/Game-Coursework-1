@@ -10,25 +10,26 @@ public class PlayerCollisionScript : MonoBehaviour
 	private float powerUp1Cost = 1;
 	private float powerUp2Increase = 0.1f;
 	private float powerUp3Multiplier = 2;
+	private Dictionary<string, Action> tags;
 
 	void Start()
 	{
 		player = GetComponent<Player>();
 		gameController = FindObjectOfType<GameController>();
-	}
-
-	private void OnTriggerEnter(Collider collider)
-	{
-		var tags = new Dictionary<string, Action>();
-		tags["Checkpoint"] = () => {Checkpoint(collider);};
+		tags = new Dictionary<string, Action>();
 		tags["Finish"] = () => {Finish();};
-		tags["PowerUp1"] = () => {PowerUp1(collider);};
-		tags["PowerUp2"] = () => {PowerUp2(collider);};
-		tags["PowerUp3"] = () => {PowerUp3(collider);};
 		tags["Key1"] = () => {Key1();};
 		tags["Key2"] = () => {Key2();};
 		tags["LeftClickZone"] = () => {LeftClickZone();};
 		tags["SlowMoZone"] = () => {SlowMoZone();};
+	}
+
+	private void OnTriggerEnter(Collider collider)
+	{
+		tags["Checkpoint"] = () => {Checkpoint(collider);};
+		tags["PowerUp1"] = () => {PowerUp1(collider);};
+		tags["PowerUp2"] = () => {PowerUp2(collider);};
+		tags["PowerUp3"] = () => {PowerUp3(collider);};	
 
 		tags[collider.gameObject.tag].Invoke();
 	}
