@@ -6,6 +6,7 @@ public class BulletCollision : MonoBehaviour
 {
 	public int numCollisions;
 	public int maxCollisions;
+
 	private BulletMovement movement;
 	private Player player;
 
@@ -22,19 +23,24 @@ public class BulletCollision : MonoBehaviour
 			player.Die();
 		}
 
-		if (numCollisions < maxCollisions)
-		{			
-			if (collision.gameObject.tag == "Wall")
-			{
-				movement?.CollideWithWall();
-			}
-			else if (collision.gameObject.tag == "Floor")
-			{
-				movement?.CollideWithFloor();
-			}
-			numCollisions++;
-			return;
-		}
+		// if (numCollisions < maxCollisions)
+		// {			
+		// 	CollideWithLevel(collision);
+		// 	return;
+		// }
 		gameObject.SetActive(false);
 	}
+
+	// private void CollideWithLevel(Collision collision)
+	// {
+	// 	if (collision.gameObject.tag == "Wall")
+	// 	{
+	// 		movement?.CollideWithWall();
+	// 	}
+	// 	else if (collision.gameObject.tag == "Floor")
+	// 	{
+	// 		movement?.CollideWithFloor();
+	// 	}
+	// 	numCollisions++;
+	// }
 }

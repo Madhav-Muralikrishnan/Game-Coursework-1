@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,9 @@ public class PlayerCollisionScript : MonoBehaviour
 {
 	private GameController gameController;
 	private Player player;
+	private float powerUp1Cost = 1;
+	private float powerUp2Increase = 0.1f;
+	private float powerUp3Multiplier = 2;
 
 	void Start()
 	{
@@ -15,49 +19,18 @@ public class PlayerCollisionScript : MonoBehaviour
 
 	private void OnTriggerEnter(Collider collider)
 	{
-		if(collider.gameObject.tag == "Checkpoint")
-		{
-			Checkpoint(collider);
-		}
-		else if(collider.gameObject.tag == "Finish")
-		{
-			Debug.Log("Finish");	
-			gameController.Finish();
-		}
-		else if(collider.gameObject.tag == "PowerUp1")
-		{
-			PowerUp1(collider);
-		}
-		else if(collider.gameObject.tag == "PowerUp2")
-		{
-			PowerUp2(collider);
-		}
-		else if(collider.gameObject.tag == "PowerUp3")
-		{
-			PowerUp3(collider);
-		}
-		else if(collider.gameObject.tag == "Key1")
-		{
-			Debug.Log("Key1 collected");
-			Destroy(collider.gameObject);
-			gameController.Key1();
-		}
-		else if(collider.gameObject.tag == "Key2")
-		{
-			Debug.Log("Key2 collected");
-			Destroy(collider.gameObject);
-			gameController.Key2();
-		}
-		else if(collider.gameObject.tag == "LeftClickZone")
-		{
-			Debug.Log("Left click zone passed");
-			gameController.leftClick = true;
-		}
-		else if(collider.gameObject.tag == "SlowMoZone")
-		{
-			Debug.Log("Slow mo zone passed");
-			gameController.ActivateSlowMoBar();
-		}
+		var tags = new Dictionary<string, Action>();
+		tags["Checkpoint"] = () => {Checkpoint(collider);};
+		tags["Finish"] = () => {Finish();};
+		tags["PowerUp1"] = () => {PowerUp1(collider);};
+		tags["PowerUp2"] = () => {PowerUp2(collider);};
+		tags["PowerUp3"] = () => {PowerUp3(collider);};
+		tags["Key1"] = () => {Key1();};
+		tags["Key2"] = () => {Key2();};
+		tags["LeftClickZone"] = () => {LeftClickZone();};
+		tags["SlowMoZone"] = () => {SlowMoZone();};
+
+		tags[collider.gameObject.tag].Invoke();
 	}
 
 	private void Checkpoint(Collider collider)
@@ -69,14 +42,20 @@ public class PlayerCollisionScript : MonoBehaviour
 		gameController.SetCheckpoint(position, rotation);
 	}
 
+	private void Finish()
+	{
+		Debug.Log("Finish");	
+		gameController.Finish();
+	}
+
 	private void PowerUp1(Collider collision)
 	{
 		Debug.Log("Hit PowerUp1");
 
 		//Remove some slow mo and destroy bullets in area
-		if (gameController.slowMoTimer - 1 > 0)
+		if (gameController.slowMoTimer - powerUp1Cost > 0)
 		{
-			gameController.slowMoTimer -= 1;
+			gameController.slowMoTimer -= powerUp1Cost;
 		}
 		else
 		{
@@ -101,7 +80,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		Debug.Log("Hit PowerUp2");
 		Destroy(collider.gameObject);
 		gameController.powerUp2Active = true;
-		gameController.slowMoTimer += 0.1f;
+		gameController.slowMoTimer += powerUp2Increase;
 		StartCoroutine(PowerUp2Ending());
 	}
 
@@ -117,14 +96,40 @@ public class PlayerCollisionScript : MonoBehaviour
 		//Movement speed doubles
 		Debug.Log("Hit PowerUp3");
 		Destroy(collider.gameObject);
-		player.movementSpeed = player.movementSpeed * 2;
+		player.movementSpeed = player.movementSpeed * powerUp3Multiplier;
 		StartCoroutine(PowerUp3Ending());
 	}
 
 	private IEnumerator PowerUp3Ending()
 	{
 		yield return new WaitForSeconds(3);
-		player.movementSpeed = player.movementSpeed / 2;
+		player.movementSpeed = player.movementSpeed / powerUp3Multiplier;
 		Debug.Log("PowerUp3 Ended");
+	}
+
+	private void Key1()
+	{
+		Debug.Log("Key1 collected");
+		Destroy(GetComponent<Collider>().gameObject);
+		gameController.Key1();
+	}
+
+	private void Key2()
+	{
+		Debug.Log("Key2 collected");
+		Destroy(GetComponent<Collider>().gameObject);
+		gameController.Key2();
+	}
+
+	private void LeftClickZone()
+	{
+		Debug.Log("Left click zone passed");
+		gameController.leftClick = true;
+	}
+
+	private void SlowMoZone()
+	{
+		Debug.Log("Slow mo zone passed");
+		gameController.ActivateSlowMoBar();
 	}
 }

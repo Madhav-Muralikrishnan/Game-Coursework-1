@@ -22,10 +22,12 @@ public class GameController : MonoBehaviour
 	private Vector3 lastCheckPoint;
 	private Vector3 lastCheckPointRotation;
 	private int numDeaths = 0;
-	private float timer = 0;
+	private float heartBeatsPerSecond = 1;
 	private float timerWhenSlowMultiplier = 1;
+	private float timer = 0;
 	private int totalHeartBeats = 0;
 	private int key2sCollected = 0;
+	private int key2sNeeded = 4;
 
 	// Start is called before the first frame update
 	void Start()
@@ -42,7 +44,7 @@ public class GameController : MonoBehaviour
 		if (isSlowMo)
 			timer += Time.deltaTime * timerWhenSlowMultiplier;
 
-		if (timer >= 1)
+		if (timer >= heartBeatsPerSecond)
 		{
 			totalHeartBeats++;
 			timer = 0;
@@ -88,7 +90,7 @@ public class GameController : MonoBehaviour
 	{
 		key2sCollected++;
 
-		if (key2sCollected >= 4)
+		if (key2sCollected >= key2sNeeded)
 		{
 			door2.SetActive(false);
 			doorSound.Play();

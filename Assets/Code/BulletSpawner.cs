@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-	public float delayBetweenShoot = 1.0f;
 	public GameObject bullet;
 	public int amountToPool;
+	public float delayBetweenShoot = 1.0f;
 	public float maxRotation;
 	public float rotationSpeed;
 	public float maxHeight;
 	public float verticalSpeed;
 	public float maxHorizontal;
 	public float horizontalSpeed;
+
 	private List<GameObject> pooledBullets;
-	private BulletMovement bulletMovement;
 	private GameController gameController;
 	private float spawnTimer = 0;
 	private float timer = 0;
@@ -27,7 +27,7 @@ public class BulletSpawner : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		bulletMovement = bullet.GetComponent<BulletMovement>();
+		BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
 		gameController = FindObjectOfType<GameController>();
 
 		pooledBullets = new List<GameObject>();

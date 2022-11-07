@@ -6,20 +6,18 @@ using UnityEngine.UI;
 public class SlowMoBar : MonoBehaviour
 {
 	public Image mask;
+
 	private GameController gameController;
-	private float maximum;
 
 	// Start is called before the first frame update
 	void Start()
 	{
 		gameController = FindObjectOfType<GameController>();
-		maximum = (float)gameController.slowMoTimerMax;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		var fillAmount = (float)gameController.slowMoTimer / (float)gameController.slowMoTimerMax;
-		mask.fillAmount = fillAmount;
+		mask.fillAmount = (float)gameController.slowMoTimer / (float)gameController.slowMoTimerMax;
 	}
 }

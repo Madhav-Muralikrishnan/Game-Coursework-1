@@ -6,6 +6,7 @@ public class BulletMovement : MonoBehaviour
 {
 	public float movementSpeed = 5.0f;
 	public float slowedSpeed = 0.5f;
+
 	private GameController gameController;
 	private Rigidbody rigidBody;
 
@@ -29,13 +30,13 @@ public class BulletMovement : MonoBehaviour
 		rigidBody.AddForce(transform.forward * movementSpeed, ForceMode.Impulse);
 	}
 
-	public void CollideWithWall()
-	{
+	// public void CollideWithWall()
+	// {
 		
-	}
+	// }
 
-	public void CollideWithFloor()
-	{
+	// public void CollideWithFloor()
+	// {
 
-	}
+	// }
 }

@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 	public float jumpForce = 1f;
 	public float jumpGravity = 7f;
 	public AudioSource deathSound;
+
 	private GameController gameController;
 	private Rigidbody rigidBody;
 	private float playerHeight = 2f;
@@ -44,25 +45,34 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.W))
 		{
-			rigidBody.velocity += transform.forward * movementSpeed * Time.deltaTime;
-			moving = true;
+			VelocityChanges(transform.forward, true);
 		}
 		if (Input.GetKey(KeyCode.S))
 		{
-			rigidBody.velocity -= transform.forward * movementSpeed * Time.deltaTime;
-			moving = true;
+			VelocityChanges(transform.forward, false);
 		}
-
 		if (Input.GetKey(KeyCode.D))
 		{
-			rigidBody.velocity += transform.right * movementSpeed * Time.deltaTime;
-			moving = true;
+			VelocityChanges(transform.right, true);
 		}
 		if (Input.GetKey(KeyCode.A))
 		{
-			rigidBody.velocity -= transform.right * movementSpeed * Time.deltaTime;
-			moving = true;
+			VelocityChanges(transform.right, false);
 		}
+	}
+
+	private void VelocityChanges(Vector3 direction, bool positive)
+	{
+		if(positive)
+		{
+			rigidBody.velocity += direction * movementSpeed * Time.deltaTime;
+		}
+		else
+		{
+			rigidBody.velocity -= direction * movementSpeed * Time.deltaTime;
+		}
+
+		moving = true;
 	}
 
 	private void SlowMoUpdate()
@@ -74,22 +84,27 @@ public class Player : MonoBehaviour
 
 		if (gameController.slowMoTimer != 0)
 		{
-			gameController.isSlowMo = Input.GetKey(KeyCode.Mouse0) && gameController.leftClick;
-
-			if (gameController.isSlowMo)
-			{
-				if (!gameController.powerUp2Active)
-					gameController.slowMoTimer -= Time.deltaTime;
-
-				if (gameController.slowMoTimer < 0)
-				{
-					gameController.slowMoTimer = 0;
-				}
-			}
+			UseSlowMo();
 		}
 		else
 		{
 			gameController.isSlowMo = false;
+		}
+	}
+
+	private void UseSlowMo()
+	{
+		gameController.isSlowMo = Input.GetKey(KeyCode.Mouse0) && gameController.leftClick;
+
+		if (gameController.isSlowMo)
+		{
+			if (!gameController.powerUp2Active)
+				gameController.slowMoTimer -= Time.deltaTime;
+
+			if (gameController.slowMoTimer < 0)
+			{
+				gameController.slowMoTimer = 0;
+			}
 		}
 	}
 
@@ -107,7 +122,7 @@ public class Player : MonoBehaviour
 		}
 	}
 
-	void OnCollisionEnter(Collision collider)
+	private void OnCollisionEnter(Collision collider)
 	{
 		if(collider.gameObject.tag == "Wall"){
 			rigidBody.velocity = Vector3.zero;

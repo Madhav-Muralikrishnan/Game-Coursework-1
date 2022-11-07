@@ -4,23 +4,17 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    Animator animator;
-    // Start is called before the first frame update
-    void Start()
-    {
-       animator = GetComponent<Animator>(); 
-    }
+	private Animator animator;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKey("w"))
-        {
-            animator.SetBool("IsWalking", true);
-        }
-        else
-        {
-            animator.SetBool("IsWalking",false);
-        }
-    }
+	// Start is called before the first frame update
+	void Start()
+	{
+	   animator = GetComponent<Animator>(); 
+	}
+
+	// Update is called once per frame
+	void Update()
+	{
+		animator.SetBool("IsWalking", Input.GetKey(KeyCode.W));
+	}
 }
