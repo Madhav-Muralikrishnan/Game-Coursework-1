@@ -8,10 +8,11 @@ public class GameController : MonoBehaviour
 	public Player player;
 	public List<GameObject> door1;
 	public List<GameObject> door2;
-	public GameObject slowMoBar;
+	// public GameObject slowMoBar;
 	public AudioSource heartBeatSound;
 	public AudioSource doorSound;
 	public Text heartbeatText;
+	public CircularProgressBar slowMoBar;
 	public float slowMoTimer;
 	public float slowMoTimerMax = 2;
 	public float regenSlowMoSpeed = 0.5f;
@@ -55,6 +56,7 @@ public class GameController : MonoBehaviour
 			heartbeatText.text = totalHeartBeats.ToString();
 		}
 
+		slowMoBar.m_FillAmount = slowMoTimer / slowMoTimerMax;
 	}
 
 	public void Respawn()
@@ -101,6 +103,6 @@ public class GameController : MonoBehaviour
 
 	public void ActivateSlowMoBar()
 	{
-		slowMoBar.SetActive(true);
+		slowMoBar.gameObject.SetActive(true);
 	}
 }
