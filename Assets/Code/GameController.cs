@@ -6,8 +6,8 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
 	public Player player;
-	public GameObject door1;
-	public GameObject door2;
+	public List<GameObject> door1;
+	public List<GameObject> door2;
 	public GameObject slowMoBar;
 	public AudioSource heartBeatSound;
 	public AudioSource doorSound;
@@ -82,7 +82,8 @@ public class GameController : MonoBehaviour
 
 	public void Key1()
 	{
-		door1.SetActive(false);
+		door1[0].transform.position -= new Vector3(3, 0, 0);
+		door1[1].transform.position += new Vector3(3, 0, 0);
 		doorSound.Play();
 	}
 
@@ -92,7 +93,8 @@ public class GameController : MonoBehaviour
 
 		if (key2sCollected >= key2sNeeded)
 		{
-			door2.SetActive(false);
+			door2[0].transform.position -= new Vector3(3, 0, 0);
+			door2[1].transform.position += new Vector3(3, 0, 0);
 			doorSound.Play();
 		}
 	}

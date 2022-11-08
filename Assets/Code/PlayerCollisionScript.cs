@@ -18,8 +18,6 @@ public class PlayerCollisionScript : MonoBehaviour
 		gameController = FindObjectOfType<GameController>();
 		tags = new Dictionary<string, Action>();
 		tags["Finish"] = () => {Finish();};
-		tags["Key1"] = () => {Key1();};
-		tags["Key2"] = () => {Key2();};
 		tags["LeftClickZone"] = () => {LeftClickZone();};
 		tags["SlowMoZone"] = () => {SlowMoZone();};
 	}
@@ -30,6 +28,8 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["PowerUp1"] = () => {PowerUp1(collider);};
 		tags["PowerUp2"] = () => {PowerUp2(collider);};
 		tags["PowerUp3"] = () => {PowerUp3(collider);};	
+		tags["Key1"] = () => {Key1(collider);};
+		tags["Key2"] = () => {Key2(collider);};
 
 		tags[collider.gameObject.tag].Invoke();
 	}
@@ -108,17 +108,17 @@ public class PlayerCollisionScript : MonoBehaviour
 		Debug.Log("PowerUp3 Ended");
 	}
 
-	private void Key1()
+	private void Key1(Collider collider)
 	{
 		Debug.Log("Key1 collected");
-		Destroy(GetComponent<Collider>().gameObject);
+		Destroy(collider.gameObject);
 		gameController.Key1();
 	}
 
-	private void Key2()
+	private void Key2(Collider collider)
 	{
 		Debug.Log("Key2 collected");
-		Destroy(GetComponent<Collider>().gameObject);
+		Destroy(collider.gameObject);
 		gameController.Key2();
 	}
 
