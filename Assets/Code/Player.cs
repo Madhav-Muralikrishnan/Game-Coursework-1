@@ -94,7 +94,7 @@ public class Player : MonoBehaviour
 
 	private void UseSlowMo()
 	{
-		gameController.isSlowMo = Input.GetKey(KeyCode.Mouse0) && gameController.leftClick;
+		gameController.isSlowMo = Input.GetKey(KeyCode.Mouse0) && gameController.leftClick && gameController.slowMoTimer - Time.deltaTime > 0;
 
 		if (gameController.isSlowMo)
 		{
