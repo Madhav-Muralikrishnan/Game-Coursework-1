@@ -13,7 +13,9 @@ public class BulletSpawner : MonoBehaviour
 	public float verticalSpeed;
 	public float maxHorizontal;
 	public float horizontalSpeed;
+	public bool isTargeting;
 
+	private Player player;
 	private List<GameObject> pooledBullets;
 	private GameController gameController;
 	private float spawnTimer = 0;
@@ -29,6 +31,7 @@ public class BulletSpawner : MonoBehaviour
 	{
 		BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
 		gameController = FindObjectOfType<GameController>();
+		player = FindObjectOfType<Player>();
 
 		pooledBullets = new List<GameObject>();
 		GameObject temp;
@@ -95,6 +98,21 @@ public class BulletSpawner : MonoBehaviour
 
 	private void Movement()
 	{
+		if (isTargeting)
+		{
+			var rotation = Quaternion.LookRotation(player.gameObject.transform.position - transform.position);
+			transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 1);
+
+			float horizo = Mathf.Sin(timer * horizontalSpeed) * maxHorizontal;
+			horizo += initialHorizontal;
+
+			float heigh = Mathf.Sin(timer * verticalSpeed) * maxHeight;
+			heigh += initialHeight;
+
+			transform.position = new Vector3(horizo, heigh, transform.position.z);
+			return;
+		}
+		
 		float angle = Mathf.Sin(timer * rotationSpeed) * maxRotation;
 		angle += initialRotation;
 
