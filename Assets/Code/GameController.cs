@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	public AudioSource doorSound;
 	public Text heartbeatText;
 	public CircularProgressBar slowMoBar;
+	public GameObject lightningBolt;
 	public float slowMoTimer;
 	public float slowMoTimerMax = 2;
 	public float regenSlowMoSpeed = 0.5f;
@@ -103,5 +104,6 @@ public class GameController : MonoBehaviour
 	public void ActivateSlowMoBar()
 	{
 		slowMoBar.gameObject.SetActive(true);
+		lightningBolt.SetActive(true);
 	}
 }
