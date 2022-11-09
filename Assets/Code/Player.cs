@@ -14,6 +14,12 @@ public class Player : MonoBehaviour
 	private float playerHeight = 2f;
 	private bool moving = false;
 	private bool isGrounded;
+	private bool isOnForwardWall;
+	private bool isOnBackwardWall;
+	private bool isOnLeftWall;
+	private bool isOnRightWall;
+	private float wallDistance = 1f;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -36,26 +42,36 @@ public class Player : MonoBehaviour
 	private void FixedUpdate()
 	{
 		moving = false;
+
+		GetRayCasts();
 		KeyPressUpdate();
 		SlowMoUpdate();
 		ControlDrag();
 	}
 
+	private void GetRayCasts()
+	{
+		isOnLeftWall = Physics.Raycast(transform.position, -transform.right, wallDistance);
+		isOnRightWall = Physics.Raycast(transform.position, transform.right, wallDistance);
+		isOnForwardWall = Physics.Raycast(transform.position, transform.forward, wallDistance);
+		isOnBackwardWall = Physics.Raycast(transform.position, -transform.forward, wallDistance);
+	}
+
 	private void KeyPressUpdate()
 	{
-		if (Input.GetKey(KeyCode.W))
+		if (Input.GetKey(KeyCode.W) && !isOnForwardWall)
 		{
 			VelocityChanges(transform.forward, true);
 		}
-		if (Input.GetKey(KeyCode.S))
+		if (Input.GetKey(KeyCode.S) && !isOnBackwardWall)
 		{
 			VelocityChanges(transform.forward, false);
 		}
-		if (Input.GetKey(KeyCode.D))
+		if (Input.GetKey(KeyCode.D) && !isOnRightWall)
 		{
 			VelocityChanges(transform.right, true);
 		}
-		if (Input.GetKey(KeyCode.A))
+		if (Input.GetKey(KeyCode.A) && !isOnLeftWall)
 		{
 			VelocityChanges(transform.right, false);
 		}
@@ -117,15 +133,9 @@ public class Player : MonoBehaviour
 
 	private void ControlDrag()
 	{
-		if(rigidBody.velocity.y < 0){
+		if(rigidBody.velocity.y < 0)
+		{
 			rigidBody.AddForce(Vector3.down * jumpGravity, ForceMode.Acceleration);
-		}
-	}
-
-	private void OnCollisionEnter(Collision collider)
-	{
-		if(collider.gameObject.tag == "Wall"){
-			rigidBody.velocity = Vector3.zero;
 		}
 	}
 }
