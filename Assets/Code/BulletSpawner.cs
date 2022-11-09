@@ -102,27 +102,21 @@ public class BulletSpawner : MonoBehaviour
 		{
 			var rotation = Quaternion.LookRotation(player.gameObject.transform.position - transform.position);
 			transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 1);
-
-			float horizo = Mathf.Sin(timer * horizontalSpeed) * maxHorizontal;
-			horizo += initialHorizontal;
-
-			float heigh = Mathf.Sin(timer * verticalSpeed) * maxHeight;
-			heigh += initialHeight;
-
-			transform.position = new Vector3(horizo, heigh, transform.position.z);
-			return;
 		}
-		
-		float angle = Mathf.Sin(timer * rotationSpeed) * maxRotation;
-		angle += initialRotation;
-
-		float height = Mathf.Sin(timer * verticalSpeed) * maxHeight;
-		height += initialHeight;
+		else
+		{
+			float angle = Mathf.Sin(timer * rotationSpeed) * maxRotation;
+			angle += initialRotation;
+			
+			transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
+		}
 
 		float horiz = Mathf.Sin(timer * horizontalSpeed) * maxHorizontal;
 		horiz += initialHorizontal;
 
-		transform.localRotation = Quaternion.AngleAxis(angle, Vector3.up);
+		float height = Mathf.Sin(timer * verticalSpeed) * maxHeight;
+		height += initialHeight;
+
 		transform.position = new Vector3(horiz, height, transform.position.z);
 	}
 }
