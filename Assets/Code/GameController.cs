@@ -8,7 +8,6 @@ public class GameController : MonoBehaviour
 	public Player player;
 	public List<GameObject> door1;
 	public List<GameObject> door2;
-	// public GameObject slowMoBar;
 	public AudioSource heartBeatSound;
 	public AudioSource doorSound;
 	public Text heartbeatText;
