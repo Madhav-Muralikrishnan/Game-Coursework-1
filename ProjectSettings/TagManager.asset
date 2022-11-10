@@ -15,6 +15,13 @@ TagManager:
   - Key2
   - LeftClickZone
   - SlowMoZone
+  - WZone
+  - ADZone
+  - MouseLookZone
+  - JumpZone
+  - P1Zone
+  - P2Zone
+  - P3Zone
   layers:
   - Default
   - TransparentFX

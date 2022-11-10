@@ -13,6 +13,15 @@ public class GameController : MonoBehaviour
 	public Text heartbeatText;
 	public CircularProgressBar slowMoBar;
 	public GameObject lightningBolt;
+	public GameObject slowMoTimerInfo;
+	public GameObject leftClickInfo;
+	public GameObject mouseLookInfo;
+	public GameObject wInfo;
+	public GameObject adInfo;
+	public GameObject jumpInfo;
+	public GameObject p1Info;
+	public GameObject p2Info;
+	public GameObject p3Info;
 	public float slowMoTimer;
 	public float slowMoTimerMax = 2;
 	public float regenSlowMoSpeed = 0.5f;
@@ -68,6 +77,7 @@ public class GameController : MonoBehaviour
 
 	public void SetCheckpoint(Vector3 checkPointPosition, Vector3 checkPointRotation)
 	{
+		Debug.Log("Checkpoint");
 		lastCheckPoint = checkPointPosition;
 		lastCheckPointRotation = checkPointRotation;
 	}
@@ -105,5 +115,24 @@ public class GameController : MonoBehaviour
 	{
 		slowMoBar.gameObject.SetActive(true);
 		lightningBolt.SetActive(true);
+		ActivateZone(3, slowMoTimerInfo);
+	}
+
+	public void LeftClickZone()
+	{
+		leftClick = true;
+		leftClickInfo.SetActive(true);
+	}
+
+	public void ActivateZone(int seconds, GameObject gameObject)
+	{
+		gameObject.SetActive(true);
+		StartCoroutine(DeleteAfterSeconds(seconds, gameObject));
+	}
+
+	private IEnumerator DeleteAfterSeconds(int seconds, GameObject gameObject)
+	{
+		yield return new WaitForSeconds(seconds);
+		gameObject.SetActive(false);
 	}
 }

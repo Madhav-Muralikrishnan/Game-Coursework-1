@@ -17,14 +17,25 @@ public class PlayerCollisionScript : MonoBehaviour
 		player = GetComponent<Player>();
 		gameController = FindObjectOfType<GameController>();
 		tags = new Dictionary<string, Action>();
-		tags["Finish"] = () => {Finish();};
-		tags["LeftClickZone"] = () => {LeftClickZone();};
-		tags["SlowMoZone"] = () => {SlowMoZone();};
+		tags["Finish"] = () => {gameController.Finish();};
+		tags["LeftClickZone"] = () => {gameController.LeftClickZone();};
+		tags["SlowMoZone"] = () => {gameController.ActivateSlowMoBar();};
+		tags["WZone"] = () => {gameController.ActivateZone(3, gameController.wInfo);};
+		tags["ADZone"] = () => {gameController.ActivateZone(3, gameController.adInfo);};
+		tags["MouseLookZone"] = () => {gameController.ActivateZone(3, gameController.mouseLookInfo);};
+		tags["JumpZone"] = () => {gameController.ActivateZone(3, gameController.jumpInfo);};
+		tags["P1Zone"] = () => {gameController.ActivateZone(3, gameController.p1Info);};
+		tags["P2Zone"] = () => {gameController.ActivateZone(3, gameController.p2Info);};
+		tags["P3Zone"] = () => {gameController.ActivateZone(3, gameController.p3Info);};
 	}
 
 	private void OnTriggerEnter(Collider collider)
 	{
-		tags["Checkpoint"] = () => {Checkpoint(collider);};
+		tags["Checkpoint"] = () =>
+		{
+			gameController.SetCheckpoint(collider.gameObject.transform.position, Vector3.zero);
+		};
+		
 		tags["PowerUp1"] = () => {PowerUp1(collider);};
 		tags["PowerUp2"] = () => {PowerUp2(collider);};
 		tags["PowerUp3"] = () => {PowerUp3(collider);};	
@@ -32,21 +43,6 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["Key2"] = () => {Key2(collider);};
 
 		tags[collider.gameObject.tag].Invoke();
-	}
-
-	private void Checkpoint(Collider collider)
-	{
-		Debug.Log("Checkpoint");	
-		Vector3 position = collider.gameObject.transform.position;
-		Vector3 rotation = new Vector3(0,0,0);
-
-		gameController.SetCheckpoint(position, rotation);
-	}
-
-	private void Finish()
-	{
-		Debug.Log("Finish");	
-		gameController.Finish();
 	}
 
 	private void PowerUp1(Collider collision)
@@ -120,17 +116,5 @@ public class PlayerCollisionScript : MonoBehaviour
 		Debug.Log("Key2 collected");
 		Destroy(collider.gameObject);
 		gameController.Key2();
-	}
-
-	private void LeftClickZone()
-	{
-		Debug.Log("Left click zone passed");
-		gameController.leftClick = true;
-	}
-
-	private void SlowMoZone()
-	{
-		Debug.Log("Slow mo zone passed");
-		gameController.ActivateSlowMoBar();
 	}
 }
