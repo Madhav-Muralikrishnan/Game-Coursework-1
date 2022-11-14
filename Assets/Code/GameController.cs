@@ -94,9 +94,7 @@ public class GameController : MonoBehaviour
 
 	public void Key1()
 	{
-		door1[0].transform.position -= new Vector3(3, 0, 0);
-		door1[1].transform.position += new Vector3(3, 0, 0);
-		doorSound.Play();
+		Movedoors(door1[0], door1[1]);
 	}
 
 	public void Key2()
@@ -104,11 +102,14 @@ public class GameController : MonoBehaviour
 		key2sCollected++;
 
 		if (key2sCollected >= key2sNeeded)
-		{
-			door2[0].transform.position -= new Vector3(3, 0, 0);
-			door2[1].transform.position += new Vector3(3, 0, 0);
-			doorSound.Play();
-		}
+			Movedoors(door2[0], door2[1]);
+	}
+
+	private void Movedoors(GameObject left, GameObject right)
+	{
+		left.transform.position -= new Vector3(3, 0, 0);
+		right.transform.position += new Vector3(3, 0, 0);
+		doorSound.Play();
 	}
 
 	public void ActivateSlowMoBar()
