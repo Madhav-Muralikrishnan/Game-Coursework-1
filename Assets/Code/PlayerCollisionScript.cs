@@ -78,6 +78,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		Destroy(collider.gameObject);
 		gameController.powerUp2Active = true;
 		gameController.slowMoTimer += powerUp2Increase;
+		gameController.slowMoBar.m_FillColor = Color.red;
 		StartCoroutine(PowerUp2Ending());
 	}
 
@@ -85,6 +86,7 @@ public class PlayerCollisionScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(3);
 		gameController.powerUp2Active = false;
+		gameController.slowMoBar.m_FillColor = Color.blue;
 		Debug.Log("PowerUp2 Ended");
 	}
 

@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
 	void Start()
 	{
 		slowMoTimer = slowMoTimerMax;
+		slowMoBar.m_FillColor = Color.blue;
 		SetCheckpoint(new Vector3(-5,1,-7), new Vector3(0,0,0));
 	}
 

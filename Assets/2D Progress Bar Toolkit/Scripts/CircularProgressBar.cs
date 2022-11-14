@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class CircularProgressBar : MonoBehaviour {
 	[Header("Colors")]
 	[SerializeField] private Color m_MainColor = Color.white;
-	[SerializeField] private Color m_FillColor = Color.green;
+	[SerializeField] public Color m_FillColor = Color.green;
 	
 	[Header("General")]
 	[SerializeField] private int m_NumberOfSegments = 5;
