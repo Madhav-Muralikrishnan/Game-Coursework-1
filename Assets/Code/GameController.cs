@@ -83,7 +83,6 @@ public class GameController : MonoBehaviour
 	public void SetCheckpoint(Vector3 checkPointPosition, Vector3 checkPointRotation)
 	{
 		Debug.Log("Checkpoint");
-		checkpointSound.Play();
 		lastCheckPoint = checkPointPosition;
 		lastCheckPointRotation = checkPointRotation;
 	}

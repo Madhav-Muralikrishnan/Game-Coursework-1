@@ -36,6 +36,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["Checkpoint"] = () =>
 		{
 			gameController.SetCheckpoint(collider.gameObject.transform.position, Vector3.zero);
+			gameController.checkpointSound.Play();
 		};
 		
 		tags["PowerUp1"] = () => {PowerUp1(collider);};
