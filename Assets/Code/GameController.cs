@@ -10,12 +10,15 @@ public class GameController : MonoBehaviour
 	public List<GameObject> door2;
 	public AudioSource heartBeatSound;
 	public AudioSource doorSound;
+	public AudioSource checkpointSound;
 	public Text heartbeatText;
 	public CircularProgressBar slowMoBar;
 	public GameObject lightningBolt;
 	public GameObject slowMoTimerInfo;
 	public GameObject leftClickInfo;
 	public GameObject mouseLookInfo;
+	public GameObject doorInfo;
+	public GameObject checkPointInfo;
 	public GameObject wInfo;
 	public GameObject adInfo;
 	public GameObject jumpInfo;
@@ -80,6 +83,7 @@ public class GameController : MonoBehaviour
 	public void SetCheckpoint(Vector3 checkPointPosition, Vector3 checkPointRotation)
 	{
 		Debug.Log("Checkpoint");
+		checkpointSound.Play();
 		lastCheckPoint = checkPointPosition;
 		lastCheckPointRotation = checkPointRotation;
 	}

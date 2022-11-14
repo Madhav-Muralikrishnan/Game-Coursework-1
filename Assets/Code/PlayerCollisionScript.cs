@@ -27,6 +27,8 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["P1Zone"] = () => {gameController.ActivateZone(3, gameController.p1Info);};
 		tags["P2Zone"] = () => {gameController.ActivateZone(3, gameController.p2Info);};
 		tags["P3Zone"] = () => {gameController.ActivateZone(3, gameController.p3Info);};
+		tags["DoorZone"] = () => {gameController.ActivateZone(3, gameController.doorInfo);};
+		tags["CheckPointZone"] = () => {gameController.ActivateZone(3, gameController.checkPointInfo);};
 	}
 
 	private void OnTriggerEnter(Collider collider)
