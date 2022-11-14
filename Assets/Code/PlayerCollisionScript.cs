@@ -65,9 +65,9 @@ public class PlayerCollisionScript : MonoBehaviour
 
 		foreach (Collider collider in colliders)
 		{
-			if (collider?.gameObject?.tag == "Bullet")
+			if (collider?.gameObject?.tag == "BulletSpawner")
 			{
-				collider.gameObject.SetActive(false);
+				collider.gameObject.GetComponent<BulletSpawner>().EMP();
 			}
 		}
 		Destroy(collision.gameObject);

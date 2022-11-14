@@ -24,6 +24,7 @@ public class BulletSpawner : MonoBehaviour
 	private float initialRotation;
 	private float initialHeight;
 	private float initialHorizontal;
+	private bool isWorking = true;
 
 
 	// Start is called before the first frame update
@@ -65,10 +66,8 @@ public class BulletSpawner : MonoBehaviour
 
 		Movement();
 
-		if (spawnTimer >= delayBetweenShoot)
-		{
+		if (spawnTimer >= delayBetweenShoot && isWorking)
 			Spawn();
-		}
 	}
 
 	void Spawn()
@@ -118,5 +117,18 @@ public class BulletSpawner : MonoBehaviour
 		height += initialHeight;
 
 		transform.position = new Vector3(horiz, height, transform.position.z);
+	}
+
+	public void EMP()
+	{
+		isWorking = false;
+		StartCoroutine(EmpTimer());
+	}
+
+	private IEnumerator EmpTimer()
+	{
+		yield return new WaitForSeconds(3);
+		isWorking = true;
+		Debug.Log("EMP Ended");
 	}
 }
