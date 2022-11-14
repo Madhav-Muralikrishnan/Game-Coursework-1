@@ -71,6 +71,7 @@ public class GameController : MonoBehaviour
 	public void Respawn()
 	{
 		Debug.Log("Respawning to " + lastCheckPoint);
+		slowMoTimer = slowMoTimerMax;
 		player.transform.position = lastCheckPoint;
 		player.transform.eulerAngles = lastCheckPointRotation;
 	}
@@ -122,7 +123,7 @@ public class GameController : MonoBehaviour
 	public void LeftClickZone()
 	{
 		leftClick = true;
-		leftClickInfo.SetActive(true);
+		ActivateZone(3, leftClickInfo);
 	}
 
 	public void ActivateZone(int seconds, GameObject gameObject)
