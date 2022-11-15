@@ -26,6 +26,8 @@ public class Player : MonoBehaviour
 	{
 		gameController = FindObjectOfType<GameController>();
 		rigidBody = GetComponent<Rigidbody>();
+		this.transform.GetChild(0).gameObject.GetComponent<CameraOrbit>().enabled = false;
+		this.transform.GetChild(0).gameObject.GetComponent<Camera>().enabled = true;
 	}
 
 	private void Update()
