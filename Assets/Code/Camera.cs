@@ -19,7 +19,8 @@ public class Camera : MonoBehaviour
 
 	void Start()
 	{
-		//GetComponent<CameraOrbit>.enabled = false;
+		gameObject.GetComponent<CameraOrbit>().enabled = false;
+		gameObject.GetComponent<Camera>().enabled = true;
 		
 	}
 
@@ -35,15 +36,18 @@ public class Camera : MonoBehaviour
 
 		if(Input.GetKey(KeyCode.Mouse0))
 		{
-			ZoomOut();
+			gameObject.GetComponent<CameraOrbit>().enabled = true;
+			gameObject.GetComponent<Camera>().enabled = false;
+
 		}
-		if(Input.GetKeyUp(KeyCode.Mouse0))
+		else
 		{
-			ZoomIn();
+			gameObject.GetComponent<CameraOrbit>().enabled = false;
+			gameObject.GetComponent<Camera>().enabled = true;
 		}
 	}
 
-	void ZoomOut()
+	/*void ZoomOut()
 	{
 		if(zoomedOut == false)
 		{
@@ -52,7 +56,7 @@ public class Camera : MonoBehaviour
 				transform.Translate(Vector3.back);
 				//GetComponent<CameraOrbit>().enabled = true;
 				
-				Debug.Log("Zoom");
+				
 			}
 			//transform.Translate(Vector3.back * zoomOutAmount);
 			zoomedOut = true;
@@ -68,5 +72,5 @@ public class Camera : MonoBehaviour
 			
 			zoomedOut = false;
 		}
-	}
+	}*/
 }
