@@ -22,6 +22,8 @@ TagManager:
   - P1Zone
   - P2Zone
   - P3Zone
+  - DoorZone
+  - CheckPointZone
   layers:
   - Default
   - TransparentFX
