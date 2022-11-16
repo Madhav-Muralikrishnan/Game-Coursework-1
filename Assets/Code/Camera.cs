@@ -6,71 +6,55 @@ using UnityEngine.InputSystem;
 public class Camera : MonoBehaviour
 {
 	public Player player;
-	public float multiplierUp = 5f;
-	public float multiplierLeftRight = 10f;
-	public float cameraVerticalRotation = 0f;
+	public GameController gameController;
+	public Transform target;
+	public float smoothness;
+	public float zoomLevel = 3f;
+	public float multiplierLeftRight;
+	public float multiplierUp;
+	public Vector2 yClamping = new Vector2(-90, 90);
+	public float minSlowMo = 0.1f;
 
-	private float mouseX; 
+	private float mouseX;
 	private float mouseY;
-	private float minRotation = -90f;
-	private float maxRotation = 90f;
-	private bool zoomedOut = false;
-	public float zoomOutAmount = 5f;
-
-	void Start()
-	{
-		gameObject.GetComponent<CameraOrbit>().enabled = false;
-		gameObject.GetComponent<Camera>().enabled = true;
-		
-	}
+	private float xRotation;
+	private float yRotation;
+	private Vector3 currentRotation;
+	private bool cameraOrbit = false;
+	private Vector3 cameraOffset = Vector3.up;
+	private Vector3 timeToSnap = Vector3.zero;
 
 	private void Update()
 	{
+		cameraOrbit = gameController.isSlowMo && gameController.slowMoTimer - minSlowMo > 0;
+
 		mouseX = Input.GetAxisRaw("Mouse X") * multiplierLeftRight;
 		mouseY = Input.GetAxisRaw("Mouse Y") * multiplierUp;
 
-		cameraVerticalRotation -= mouseY;
-		cameraVerticalRotation = Mathf.Clamp(cameraVerticalRotation, minRotation, maxRotation);
-		transform.localEulerAngles = Vector3.right * cameraVerticalRotation;
-		player.transform.Rotate(Vector3.up * mouseX);
+		xRotation += mouseX;
+		yRotation -= mouseY;
 
-		if(Input.GetKey(KeyCode.Mouse0))
-		{
-			gameObject.GetComponent<CameraOrbit>().enabled = true;
-			gameObject.GetComponent<Camera>().enabled = false;
+		yRotation = Mathf.Clamp(yRotation, yClamping.x, yClamping.y);
 
-		}
-		else
+		if (!cameraOrbit)
 		{
-			gameObject.GetComponent<CameraOrbit>().enabled = false;
-			gameObject.GetComponent<Camera>().enabled = true;
+			transform.position = player.transform.position + cameraOffset;
+
+			transform.localEulerAngles = Vector3.right * yRotation;
+			player.transform.Rotate(Vector3.up * mouseX);
+
+			return;
 		}
+
+		Vector3 newRotation = new Vector3(yRotation, xRotation);
+
+		// Apply damping between rotation changes
+		currentRotation = Vector3.SmoothDamp(currentRotation, newRotation, ref timeToSnap, smoothness);
+		player.gameObject.transform.localEulerAngles = new Vector3(0, currentRotation.y, 0);
+		transform.localEulerAngles = new Vector3(currentRotation.x, 0, currentRotation.z);
+
+		// Substract forward vector of the GameObject to point its forward vector to the target
+		transform.position = target.position + Vector3.up * 2 - transform.forward * zoomLevel;
 	}
 
-	/*void ZoomOut()
-	{
-		if(zoomedOut == false)
-		{
-			for (int i = 0; i < zoomOutAmount; i++ )
-			{
-				transform.Translate(Vector3.back);
-				//GetComponent<CameraOrbit>().enabled = true;
-				
-				
-			}
-			//transform.Translate(Vector3.back * zoomOutAmount);
-			zoomedOut = true;
-		}
-	}
-
-	void ZoomIn()
-	{
-		if(zoomedOut == true)
-		{
-			transform.Translate(Vector3.forward * zoomOutAmount);
-			//GetComponent<CameraOrbit>.enabled = false;
-			
-			zoomedOut = false;
-		}
-	}*/
 }
