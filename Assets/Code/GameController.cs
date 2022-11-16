@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
 	public List<GameObject> door1;
 	public List<GameObject> door2;
 	public AudioSource heartBeatSound;
+	public float heartBeatVolume = 0.6f;
 	public AudioSource doorSound;
 	public AudioSource checkpointSound;
 	public Text heartbeatText;
@@ -64,6 +65,14 @@ public class GameController : MonoBehaviour
 			timer = 0;
 
 			//Play heartbeat audio
+			if (isSlowMo)
+			{
+				heartBeatSound.volume = 1;
+			}
+			else
+			{
+				heartBeatSound.volume = heartBeatVolume;
+			}
 			heartBeatSound.Play();
 
 			heartbeatText.text = totalHeartBeats.ToString();
