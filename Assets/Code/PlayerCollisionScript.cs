@@ -44,6 +44,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["PowerUp3"] = () => {PowerUp3(collider);};	
 		tags["Key1"] = () => {Key1(collider);};
 		tags["Key2"] = () => {Key2(collider);};
+		tags["HeartBeatZone"] = () => {gameController.heartbeatStarted = true;};
 
 		tags[collider.gameObject.tag].Invoke();
 	}

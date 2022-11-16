@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
 	public bool isSlowMo = false;
 	public bool powerUp2Active = false;
 	public bool leftClick = false;
+	public bool heartbeatStarted = false;
 
 	private Vector3 lastCheckPoint;
 	private Vector3 lastCheckPointRotation;
@@ -54,10 +55,13 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		timer += Time.deltaTime;
+		if (heartbeatStarted)
+		{
+			timer += Time.deltaTime;
 
-		if (isSlowMo)
-			timer += Time.deltaTime * timerWhenSlowMultiplier;
+			if (isSlowMo)
+				timer += Time.deltaTime * timerWhenSlowMultiplier;
+		}
 
 		if (timer >= heartBeatsPerSecond)
 		{
