@@ -16,12 +16,13 @@ public class PlayerCollisionScript : MonoBehaviour
 	{
 		player = GetComponent<Player>();
 		gameController = FindObjectOfType<GameController>();
+		
 		tags = new Dictionary<string, Action>();
 		tags["Finish"] = () => {gameController.Finish();};
 		tags["LeftClickZone"] = () => {gameController.LeftClickZone();};
 		tags["SlowMoZone"] = () => {gameController.ActivateSlowMoBar();};
-		tags["WZone"] = () => {gameController.ActivateZone(3, gameController.wInfo);};
-		tags["ADZone"] = () => {gameController.ActivateZone(3, gameController.adInfo);};
+		tags["WASDZone"] = () => {gameController.ActivateZone(3, gameController.wasdInfo);};
+		tags["StandStillZone"] = () => {gameController.ActivateZone(3, gameController.standStillInfo);};
 		tags["MouseLookZone"] = () => {gameController.ActivateZone(3, gameController.mouseLookInfo);};
 		tags["JumpZone"] = () => {gameController.ActivateZone(3, gameController.jumpInfo);};
 		tags["P1Zone"] = () => {gameController.ActivateZone(3, gameController.p1Info);};
@@ -29,6 +30,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["P3Zone"] = () => {gameController.ActivateZone(3, gameController.p3Info);};
 		tags["DoorZone"] = () => {gameController.ActivateZone(3, gameController.doorInfo);};
 		tags["CheckPointZone"] = () => {gameController.ActivateZone(3, gameController.checkPointInfo);};
+		tags["HeartBeatZone"] = () => {gameController.heartBeatStart();};
 	}
 
 	private void OnTriggerEnter(Collider collider)
@@ -44,7 +46,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["PowerUp3"] = () => {PowerUp3(collider);};	
 		tags["Key1"] = () => {Key1(collider);};
 		tags["Key2"] = () => {Key2(collider);};
-		tags["HeartBeatZone"] = () => {gameController.heartbeatStarted = true;};
+		
 
 		tags[collider.gameObject.tag].Invoke();
 	}

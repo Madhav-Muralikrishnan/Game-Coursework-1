@@ -20,12 +20,13 @@ public class GameController : MonoBehaviour
 	public GameObject mouseLookInfo;
 	public GameObject doorInfo;
 	public GameObject checkPointInfo;
-	public GameObject wInfo;
-	public GameObject adInfo;
+	public GameObject wasdInfo;
+	public GameObject standStillInfo;
 	public GameObject jumpInfo;
 	public GameObject p1Info;
 	public GameObject p2Info;
 	public GameObject p3Info;
+	public GameObject heartBeatUI;
 	public float slowMoTimer;
 	public float slowMoTimerMax = 2;
 	public float regenSlowMoSpeed = 0.5f;
@@ -153,5 +154,11 @@ public class GameController : MonoBehaviour
 	{
 		yield return new WaitForSeconds(seconds);
 		gameObject.SetActive(false);
+	}
+
+	public void heartBeatStart()
+	{
+		heartbeatStarted = true;
+		heartBeatUI.SetActive(true);
 	}
 }
