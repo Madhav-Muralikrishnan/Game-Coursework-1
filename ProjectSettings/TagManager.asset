@@ -24,6 +24,10 @@ TagManager:
   - CheckPointZone
   - StandStillZone
   - WASDZone
+  - Enter1
+  - Exit1
+  - Enter2
+  - Exit2
   layers:
   - Default
   - TransparentFX

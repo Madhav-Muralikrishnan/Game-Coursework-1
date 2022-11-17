@@ -8,6 +8,10 @@ public class GameController : MonoBehaviour
 	public Player player;
 	public List<GameObject> door1;
 	public List<GameObject> door2;
+	public List<GameObject> room1;
+	public List<GameObject> room2;
+	public List<GameObject> room3;
+	public List<GameObject> room4;
 	public AudioSource heartBeatSound;
 	public float heartBeatVolume = 0.6f;
 	public AudioSource doorSound;
@@ -160,5 +164,13 @@ public class GameController : MonoBehaviour
 	{
 		heartbeatStarted = true;
 		heartBeatUI.SetActive(true);
+	}
+
+	public void EnterExitRoom(List<GameObject> objects, bool enter)
+	{
+		foreach(GameObject obj in objects)
+		{
+			obj.SetActive(enter);
+		}
 	}
 }
