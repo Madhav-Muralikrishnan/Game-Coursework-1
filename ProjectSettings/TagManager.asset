@@ -28,6 +28,10 @@ TagManager:
   - Exit1
   - Enter2
   - Exit2
+  - Enter3
+  - Exit3
+  - Enter4
+  - Exit4
   layers:
   - Default
   - TransparentFX
