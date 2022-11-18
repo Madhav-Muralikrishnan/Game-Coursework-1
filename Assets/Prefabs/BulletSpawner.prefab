@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1612892567551757117}
   - component: {fileID: 1612892567551757090}
+  - component: {fileID: 9070314005649173884}
   m_Layer: 0
   m_Name: BulletSpawner
   m_TagString: Untagged
@@ -45,15 +46,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14a764d55b882640b712b993b8cc862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBetweenShoot: 0.37
   bullet: {fileID: 3009230849025195590, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
   amountToPool: 20
+  delayBetweenShoot: 0.37
   maxRotation: 45
   rotationSpeed: 0.5
   maxHeight: 2.5
   verticalSpeed: 0.94
   maxHorizontal: 0.84
   horizontalSpeed: 1
+  isTargeting: 0
+--- !u!65 &9070314005649173884
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1612892567551757091}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.8, y: 20, z: 3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &1612892568213665797
 PrefabInstance:
   m_ObjectHideFlags: 0
