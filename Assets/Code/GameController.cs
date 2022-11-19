@@ -17,6 +17,8 @@ public class GameController : MonoBehaviour
 	public AudioSource doorSound;
 	public AudioSource checkpointSound;
 	public Text heartbeatText;
+	public Text finalTimerText;
+	public GameObject finalScreen;
 	public CircularProgressBar slowMoBar;
 	public GameObject lightningBolt;
 	public GameObject slowMoTimerInfo;
@@ -31,6 +33,9 @@ public class GameController : MonoBehaviour
 	public GameObject p2Info;
 	public GameObject p3Info;
 	public GameObject heartBeatUI;
+	public GameObject star1;
+	public GameObject star2;
+	public GameObject star3;
 	public float slowMoTimer;
 	public float slowMoTimerMax = 2;
 	public float regenSlowMoSpeed = 0.5f;
@@ -38,6 +43,7 @@ public class GameController : MonoBehaviour
 	public bool powerUp2Active = false;
 	public bool leftClick = false;
 	public bool heartbeatStarted = false;
+	public bool finish = false;
 
 	private Vector3 lastCheckPoint;
 	private Vector3 lastCheckPointRotation;
@@ -48,10 +54,15 @@ public class GameController : MonoBehaviour
 	private int totalHeartBeats = 0;
 	private int key2sCollected = 0;
 	private int key2sNeeded = 4;
+	private int twoStars = 100;
+	private int threeStars = 50;
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		// SetAllFalse(room1);
+		// SetAllFalse(room2);
+		// SetAllFalse(room3);
 		slowMoTimer = slowMoTimerMax;
 		slowMoBar.m_FillColor = Color.blue;
 		SetCheckpoint(new Vector3(-5,1,-7), new Vector3(0,0,0));
@@ -60,6 +71,9 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (finish)
+			return;
+
 		if (heartbeatStarted)
 		{
 			timer += Time.deltaTime;
@@ -113,6 +127,22 @@ public class GameController : MonoBehaviour
 	public void Finish()
 	{
 		Debug.Log("Finish");
+		finish = true;
+		finalScreen.SetActive(true);
+		heartBeatUI.SetActive(false);
+		slowMoBar.gameObject.SetActive(false);
+		lightningBolt.SetActive(false);
+		finalTimerText.text = totalHeartBeats.ToString();
+		
+		star1.SetActive(true);
+		if (totalHeartBeats > twoStars)
+		{
+			star2.SetActive(true);
+			
+			if (totalHeartBeats > threeStars)
+				star3.SetActive(true);
+		}
+
 	}
 
 	public void Key1()
@@ -171,6 +201,14 @@ public class GameController : MonoBehaviour
 		foreach(GameObject obj in objects)
 		{
 			obj.SetActive(enter);
+		}
+	}
+
+	private void SetAllFalse(List<GameObject> room)
+	{
+		foreach(GameObject obj in room)
+		{
+			obj.SetActive(false);
 		}
 	}
 }

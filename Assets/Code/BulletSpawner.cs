@@ -13,6 +13,7 @@ public class BulletSpawner : MonoBehaviour
 	public float maxHorizontal;
 	public float horizontalSpeed;
 	public bool isTargeting;
+	public bool isWorking = true;
 
 	private Player player;
 	private List<GameObject> pooledBullets = new List<GameObject>();
@@ -23,7 +24,6 @@ public class BulletSpawner : MonoBehaviour
 	private float initialRotation;
 	private float initialHeight;
 	private float initialHorizontal;
-	private bool isWorking = true;
 
 
 	// Start is called before the first frame update
@@ -43,6 +43,9 @@ public class BulletSpawner : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		if (gameController.finish)
+			Destroy(this);
+
 		if (gameController.isSlowMo)
 		{
 			spawnTimer += Time.deltaTime * speedRatio;

@@ -26,7 +26,7 @@ public class Camera : MonoBehaviour
 
 	private void Update()
 	{
-		cameraOrbit = gameController.isSlowMo && gameController.slowMoTimer - minSlowMo > 0;
+		cameraOrbit = (gameController.isSlowMo && gameController.slowMoTimer - minSlowMo > 0) || gameController.finish;
 
 		mouseX = Input.GetAxisRaw("Mouse X") * multiplierLeftRight;
 		mouseY = Input.GetAxisRaw("Mouse Y") * multiplierUp;
