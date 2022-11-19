@@ -5,6 +5,7 @@ using UnityEngine;
 public class MixamoAnim : MonoBehaviour
 {
 	private Animator animator;
+	public GameController gameController;
 
 	// Start is called before the first frame update
 	void Start()
@@ -19,5 +20,6 @@ public class MixamoAnim : MonoBehaviour
 		animator.SetBool("BackwardsWalking", Input.GetKey(KeyCode.S));
 		animator.SetBool("LeftWalking", Input.GetKey(KeyCode.A));
 		animator.SetBool("RightWalking", Input.GetKey(KeyCode.D));
+		animator.SetBool("IsDead", gameController.dead);
 	}
 }
