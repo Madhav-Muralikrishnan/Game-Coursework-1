@@ -14,6 +14,7 @@ public class BulletSpawner : MonoBehaviour
 	public float horizontalSpeed;
 	public bool isTargeting;
 	public GameObject target;
+	public Vector3 adjustment;
 	public bool isWorking = true;
 
 	private List<GameObject> pooledBullets = new List<GameObject>();
@@ -95,7 +96,7 @@ public class BulletSpawner : MonoBehaviour
 	{
 		if (isTargeting)
 		{
-			var rotation = Quaternion.LookRotation(target.transform.position - transform.position);
+			var rotation = Quaternion.LookRotation(target.transform.position - transform.position + adjustment);
 			transform.rotation = Quaternion.Lerp(transform.rotation, rotation, 1);
 		}
 		else
