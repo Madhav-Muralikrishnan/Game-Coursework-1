@@ -44,6 +44,9 @@ public class Player : MonoBehaviour
 	{
 		moving = false;
 
+		if (gameController.dead)
+			return;
+			
 		GetRayCasts();
 		KeyPressUpdate();
 		SlowMoUpdate();
