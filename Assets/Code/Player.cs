@@ -127,6 +127,9 @@ public class Player : MonoBehaviour
 
 	public void Die()
 	{
+		if (gameController.dead)
+			return;
+
 		Debug.Log("You Died!");
 		deathSound.Play();
 		gameController.Respawn();

@@ -12,6 +12,7 @@ public class GameController : MonoBehaviour
 	public List<GameObject> room2;
 	public List<GameObject> room3;
 	public List<GameObject> room4;
+	public GameObject room5;
 	public AudioSource heartBeatSound;
 	public float heartBeatVolume = 0.6f;
 	public AudioSource doorSound;
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
 	public bool leftClick = false;
 	public bool heartbeatStarted = false;
 	public bool finish = false;
+	public bool dead = false;
 
 	private Vector3 lastCheckPoint;
 	private Vector3 lastCheckPointRotation;
@@ -60,9 +62,10 @@ public class GameController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		// SetAllFalse(room1);
-		// SetAllFalse(room2);
-		// SetAllFalse(room3);
+		SetAllFalse(room1);
+		SetAllFalse(room2);
+		SetAllFalse(room3);
+		room5.SetActive(false);
 		slowMoTimer = slowMoTimerMax;
 		slowMoBar.m_FillColor = Color.blue;
 		SetCheckpoint(new Vector3(-5,1,-7), new Vector3(0,0,0));
@@ -107,9 +110,20 @@ public class GameController : MonoBehaviour
 	public void Respawn()
 	{
 		Debug.Log("Respawning to " + lastCheckPoint);
+
+		dead = true;
+		StartCoroutine(RespawnAfterSeconds(3));
+	}
+
+	private IEnumerator RespawnAfterSeconds(int seconds)
+	{
+		yield return new WaitForSeconds(seconds);
+		dead = false;
 		slowMoTimer = slowMoTimerMax;
 		player.transform.position = lastCheckPoint;
 		player.transform.eulerAngles = lastCheckPointRotation;
+		SetAllFalse(room1);
+		SetAllFalse(room2);
 	}
 
 	public void SetCheckpoint(Vector3 checkPointPosition, Vector3 checkPointRotation)
@@ -160,6 +174,8 @@ public class GameController : MonoBehaviour
 
 		if (key2sCollected >= key2sNeeded)
 			Movedoors(door2[0], door2[1]);
+
+		room5.SetActive(true);
 	}
 
 	private void Movedoors(GameObject left, GameObject right)
