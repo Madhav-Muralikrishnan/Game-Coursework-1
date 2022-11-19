@@ -21,6 +21,9 @@ public class BulletMovement : MonoBehaviour
 	// Update is called once per fixed frame
 	void FixedUpdate()
 	{
+		if (gameController.finish)
+			return;
+			
 		rigidBody.velocity = Vector3.zero;
 		if(gameController.isSlowMo)
 		{
