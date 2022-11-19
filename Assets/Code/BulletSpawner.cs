@@ -68,7 +68,7 @@ public class BulletSpawner : MonoBehaviour
 		GameObject bullet = GetObject(); 
 		if (bullet != null)
 		{
-			bullet.transform.position = transform.position;
+			bullet.transform.position = transform.position + transform.forward;
 			bullet.transform.rotation = transform.rotation;
 			bullet.SetActive(true);
 		}
