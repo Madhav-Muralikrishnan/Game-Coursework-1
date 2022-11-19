@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour
 		room5.SetActive(false);
 		slowMoTimer = slowMoTimerMax;
 		slowMoBar.m_FillColor = Color.blue;
-		SetCheckpoint(new Vector3(-5,1,-7), new Vector3(0,0,0));
+		SetCheckpoint(new Vector3(-63,1,-7), new Vector3(0,0,0));
 	}
 
 	// Update is called once per frame
