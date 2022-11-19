@@ -134,13 +134,17 @@ public class GameController : MonoBehaviour
 		lightningBolt.SetActive(false);
 		finalTimerText.text = totalHeartBeats.ToString();
 		
-		star1.SetActive(true);
-		if (totalHeartBeats > twoStars)
+		if (totalHeartBeats < twoStars)
+		{
+			star1.SetActive(true);
+		}
+		else if (totalHeartBeats < threeStars)
 		{
 			star2.SetActive(true);
-			
-			if (totalHeartBeats > threeStars)
-				star3.SetActive(true);
+		}
+		else
+		{
+			star3.SetActive(true);
 		}
 
 	}
