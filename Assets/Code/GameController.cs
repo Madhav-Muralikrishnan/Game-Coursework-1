@@ -112,7 +112,7 @@ public class GameController : MonoBehaviour
 		Debug.Log("Respawning to " + lastCheckPoint);
 
 		dead = true;
-		StartCoroutine(RespawnAfterSeconds(3));
+		StartCoroutine(RespawnAfterSeconds(6));
 	}
 
 	private IEnumerator RespawnAfterSeconds(int seconds)
