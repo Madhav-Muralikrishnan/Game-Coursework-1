@@ -31,14 +31,16 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["DoorZone"] = () => {gameController.ActivateZone(2, gameController.doorInfo);};
 		tags["CheckPointZone"] = () => {gameController.ActivateZone(2, gameController.checkPointInfo);};
 		tags["HeartBeatZone"] = () => {gameController.heartBeatStart();};
-		tags["Enter1"] = () => {gameController.EnterExitRoom(gameController.room1, true);};
-		tags["Exit1"] = () => {gameController.EnterExitRoom(gameController.room1, false);};
-		tags["Enter2"] = () => {gameController.EnterExitRoom(gameController.room2, true);};
-		tags["Exit2"] = () => {gameController.EnterExitRoom(gameController.room2, false);};
+		tags["Enter1"] = () => {gameController.EnterExitRoom(gameController.spawners1, true);};
+		tags["Exit1"] = () => {gameController.EnterExitRoom(gameController.spawners1, false);};
+		tags["Enter2"] = () => {gameController.EnterExitRoom(gameController.spawners2, true);};
+		tags["Exit2"] = () => {gameController.EnterExitRoom(gameController.spawners2, false);};
 		tags["Enter3"] = () => {gameController.EnterExitRoom(gameController.room3, true);};
 		tags["Exit3"] = () => {gameController.EnterExitRoom(gameController.room3, false);};
 		tags["Enter4"] = () => {gameController.EnterExitRoom(gameController.room4, true);};
 		tags["Exit4"] = () => {gameController.EnterExitRoom(gameController.room4, false);};
+		tags["Enter5"] = () => {gameController.EnterExitRoom(gameController.spawnersFinal, true);};
+		tags["Exit5"] = () => {gameController.EnterExitRoom(gameController.spawnersFinal, false);};
 	}
 
 	private void OnTriggerEnter(Collider collider)

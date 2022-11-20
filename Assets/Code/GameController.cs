@@ -8,11 +8,12 @@ public class GameController : MonoBehaviour
 	public Player player;
 	public List<GameObject> door1;
 	public List<GameObject> door2;
-	public List<GameObject> room1;
-	public List<GameObject> room2;
+	public List<GameObject> spawners1;
+	public List<GameObject> spawners2;
 	public List<GameObject> room3;
 	public List<GameObject> room4;
-	public GameObject room5;
+	public List<GameObject> finalRoom;
+	public List<GameObject> spawnersFinal;
 	public AudioSource heartBeatSound;
 	public AudioSource music;
 	public AudioSource finishMusic;
@@ -67,10 +68,12 @@ public class GameController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		SetAllFalse(room1);
-		SetAllFalse(room2);
+		SetAllFalse(spawners1);
+		SetAllFalse(spawners2);
 		SetAllFalse(room3);
-		room5.SetActive(false);
+		SetAllFalse(finalRoom);
+		SetAllFalse(spawnersFinal);
+		
 		slowMoTimer = slowMoTimerMax;
 		slowMoBar.m_FillColor = Color.blue;
 		SetCheckpoint(new Vector3(-63,1,-7), new Vector3(0,0,0));
@@ -127,8 +130,9 @@ public class GameController : MonoBehaviour
 		slowMoTimer = slowMoTimerMax;
 		player.transform.position = lastCheckPoint;
 		player.transform.eulerAngles = lastCheckPointRotation;
-		SetAllFalse(room1);
-		SetAllFalse(room2);
+		SetAllFalse(spawners1);
+		SetAllFalse(spawners2);
+		SetAllFalse(spawnersFinal);
 	}
 
 	public void SetCheckpoint(Vector3 checkPointPosition, Vector3 checkPointRotation)
@@ -185,7 +189,7 @@ public class GameController : MonoBehaviour
 		if (key2sCollected >= key2sNeeded)
 		{
 			Movedoors(door2[0], door2[1]);
-			room5.SetActive(true);
+			SetAllFalse(spawnersFinal, true);
 		}
 	}
 
@@ -235,11 +239,11 @@ public class GameController : MonoBehaviour
 		}
 	}
 
-	private void SetAllFalse(List<GameObject> room)
+	private void SetAllFalse(List<GameObject> room, bool boolean = false)
 	{
 		foreach(GameObject obj in room)
 		{
-			obj.SetActive(false);
+			obj.SetActive(boolean);
 		}
 	}
 }
