@@ -200,7 +200,7 @@ public class GameController : MonoBehaviour
 	{
 		slowMoBar.gameObject.SetActive(true);
 		lightningBolt.SetActive(true);
-		ActivateZone(3, slowMoTimerInfo);
+		ActivateZone(5, slowMoTimerInfo);
 	}
 
 	public void LeftClickZone()
