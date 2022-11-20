@@ -120,6 +120,7 @@ public class GameController : MonoBehaviour
 		Debug.Log("Respawning to " + lastCheckPoint);
 
 		dead = true;
+		numDeaths++;
 		StartCoroutine(RespawnAfterSeconds(5));
 	}
 
@@ -140,11 +141,6 @@ public class GameController : MonoBehaviour
 		Debug.Log("Checkpoint");
 		lastCheckPoint = checkPointPosition;
 		lastCheckPointRotation = checkPointRotation;
-	}
-
-	public void AddToDeathCounter()
-	{
-		numDeaths++;
 	}
 
 	public void Finish()
