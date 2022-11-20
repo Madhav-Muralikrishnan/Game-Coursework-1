@@ -183,9 +183,10 @@ public class GameController : MonoBehaviour
 		key2sCollected++;
 
 		if (key2sCollected >= key2sNeeded)
+		{
 			Movedoors(door2[0], door2[1]);
-
-		room5.SetActive(true);
+			room5.SetActive(true);
+		}
 	}
 
 	private void Movedoors(GameObject left, GameObject right)
