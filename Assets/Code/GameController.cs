@@ -14,9 +14,13 @@ public class GameController : MonoBehaviour
 	public List<GameObject> room4;
 	public GameObject room5;
 	public AudioSource heartBeatSound;
+	public AudioSource music;
+	public AudioSource finishMusic;
 	public float heartBeatVolume = 0.6f;
 	public AudioSource doorSound;
 	public AudioSource checkpointSound;
+	public AudioSource keySound;
+	public AudioSource powerUpSound;
 	public Text heartbeatText;
 	public Text finalTimerText;
 	public Text finalDeathsText;
@@ -143,6 +147,8 @@ public class GameController : MonoBehaviour
 	{
 		Debug.Log("Finish");
 		finish = true;
+		music.Pause();
+		finishMusic.Play();
 		finalScreen.SetActive(true);
 		heartBeatUI.SetActive(false);
 		slowMoBar.gameObject.SetActive(false);
@@ -167,11 +173,13 @@ public class GameController : MonoBehaviour
 
 	public void Key1()
 	{
+		keySound.Play();
 		Movedoors(door1[0], door1[1]);
 	}
 
 	public void Key2()
 	{
+		keySound.Play();
 		key2sCollected++;
 
 		if (key2sCollected >= key2sNeeded)

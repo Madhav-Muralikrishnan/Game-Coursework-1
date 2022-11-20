@@ -62,6 +62,7 @@ public class PlayerCollisionScript : MonoBehaviour
 	private void PowerUp1(Collider collision)
 	{
 		Debug.Log("Hit PowerUp1");
+		gameController.powerUpSound.Play();
 
 		//Remove some slow mo and destroy bullets in area
 		if (gameController.slowMoTimer - powerUp1Cost > 0)
@@ -89,6 +90,7 @@ public class PlayerCollisionScript : MonoBehaviour
 	{
 		//Stop slow mo bar decreasing for amount of time
 		Debug.Log("Hit PowerUp2");
+		gameController.powerUpSound.Play();
 		Destroy(collider.gameObject);
 		gameController.powerUp2Active = true;
 		gameController.slowMoTimer += powerUp2Increase;
@@ -108,6 +110,7 @@ public class PlayerCollisionScript : MonoBehaviour
 	{
 		//Movement speed doubles
 		Debug.Log("Hit PowerUp3");
+		gameController.powerUpSound.Play();
 		Destroy(collider.gameObject);
 		player.movementSpeed = player.movementSpeed * powerUp3Multiplier;
 		StartCoroutine(PowerUp3Ending());
