@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
 	public AudioSource checkpointSound;
 	public Text heartbeatText;
 	public Text finalTimerText;
+	public Text finalDeathsText;
 	public GameObject finalScreen;
 	public CircularProgressBar slowMoBar;
 	public GameObject lightningBolt;
@@ -147,12 +148,13 @@ public class GameController : MonoBehaviour
 		slowMoBar.gameObject.SetActive(false);
 		lightningBolt.SetActive(false);
 		finalTimerText.text = totalHeartBeats.ToString();
+		finalDeathsText.text = numDeaths.ToString();
 		
-		if (totalHeartBeats < twoStars)
+		if (totalHeartBeats > twoStars)
 		{
 			star1.SetActive(true);
 		}
-		else if (totalHeartBeats < threeStars)
+		else if (totalHeartBeats > threeStars)
 		{
 			star2.SetActive(true);
 		}

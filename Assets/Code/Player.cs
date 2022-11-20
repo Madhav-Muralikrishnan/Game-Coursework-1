@@ -30,6 +30,9 @@ public class Player : MonoBehaviour
 
 	private void Update()
 	{
+		if (gameController.dead || gameController.finish)
+			return;
+			
 		isGrounded = Physics.Raycast(transform.position, Vector3.down, playerHeight/2 + 0.1f);
 		
 		if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
@@ -44,7 +47,7 @@ public class Player : MonoBehaviour
 	{
 		moving = false;
 
-		if (gameController.dead)
+		if (gameController.dead || gameController.finish)
 			return;
 			
 		GetRayCasts();
