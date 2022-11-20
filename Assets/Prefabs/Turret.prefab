@@ -128,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14a764d55b882640b712b993b8cc862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 3009230849025195590, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
+  bullet: {fileID: 3009230849025195590, guid: 846931c9988d923498bc4715d643d7c3, type: 3}
   delayBetweenShoot: 1
   maxRotation: 0
   rotationSpeed: 0
@@ -137,6 +137,8 @@ MonoBehaviour:
   maxHorizontal: 0
   horizontalSpeed: 0
   isTargeting: 1
+  target: {fileID: 0}
+  adjustment: {x: 0, y: 0, z: 0}
   isWorking: 1
 --- !u!1 &5464353442620990720
 GameObject:
