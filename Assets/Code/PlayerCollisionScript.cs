@@ -87,7 +87,8 @@ public class PlayerCollisionScript : MonoBehaviour
 				collider.gameObject.SetActive(false);
 			}
 		}
-		Destroy(collision.gameObject);
+		collision.gameObject.SetActive(false);
+		StartCoroutine(RespawnPowerUp(collision.gameObject));
 	}
 
 	private void PowerUp2(Collider collider)
@@ -95,7 +96,10 @@ public class PlayerCollisionScript : MonoBehaviour
 		//Stop slow mo bar decreasing for amount of time
 		Debug.Log("Hit PowerUp2");
 		gameController.powerUpSound.Play();
-		Destroy(collider.gameObject);
+
+		collider.gameObject.SetActive(false);
+		StartCoroutine(RespawnPowerUp(collider.gameObject));
+
 		gameController.powerUp2Active = true;
 		gameController.slowMoTimer += powerUp2Increase;
 		StartCoroutine(PowerUp2Ending());
@@ -113,7 +117,10 @@ public class PlayerCollisionScript : MonoBehaviour
 		//Movement speed doubles
 		Debug.Log("Hit PowerUp3");
 		gameController.powerUpSound.Play();
-		Destroy(collider.gameObject);
+
+		collider.gameObject.SetActive(false);
+		StartCoroutine(RespawnPowerUp(collider.gameObject));
+
 		player.movementSpeed = player.movementSpeed * powerUp3Multiplier;
 		StartCoroutine(PowerUp3Ending());
 	}
@@ -139,8 +146,9 @@ public class PlayerCollisionScript : MonoBehaviour
 		gameController.Key2();
 	}
 
-	private IEnumerator RespawnPowerUp()
+	private IEnumerator RespawnPowerUp(GameObject gameObject)
 	{
-
+		yield return new WaitForSeconds(5);
+		gameObject.SetActive(true);
 	} 
 }
