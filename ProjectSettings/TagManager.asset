@@ -32,6 +32,7 @@ TagManager:
   - Exit3
   - Enter4
   - Exit4
+  - HeartBeatZone
   layers:
   - Default
   - TransparentFX
