@@ -21,5 +21,6 @@ public class MixamoAnim : MonoBehaviour
 		animator.SetBool("LeftWalking", Input.GetKey(KeyCode.A));
 		animator.SetBool("RightWalking", Input.GetKey(KeyCode.D));
 		animator.SetBool("IsDead", gameController.dead);
+		animator.SetAllFalse("IsFinished", gameController.finish);
 	}
 }
