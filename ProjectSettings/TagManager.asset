@@ -33,6 +33,7 @@ TagManager:
   - Enter4
   - Exit4
   - HeartBeatZone
+  - BulletSpawner
   layers:
   - Default
   - TransparentFX

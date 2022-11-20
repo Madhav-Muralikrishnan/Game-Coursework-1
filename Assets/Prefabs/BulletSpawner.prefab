@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 9070314005649173884}
   m_Layer: 0
   m_Name: BulletSpawner
-  m_TagString: Untagged
+  m_TagString: BulletSpawner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,6 +55,8 @@ MonoBehaviour:
   maxHorizontal: 0.84
   horizontalSpeed: 1
   isTargeting: 0
+  target: {fileID: 0}
+  adjustment: {x: 0, y: 0, z: 0}
   isWorking: 1
 --- !u!65 &9070314005649173884
 BoxCollider:
