@@ -121,7 +121,7 @@ public class Player : MonoBehaviour
 
 		if (gameController.isSlowMo)
 		{
-			if (!gameController.powerUp2Active)
+			if (!(gameController.powerUp2Active || gameController.unlimitedSloMo))
 				gameController.slowMoTimer -= Time.deltaTime;
 
 			if (gameController.slowMoTimer < 0)

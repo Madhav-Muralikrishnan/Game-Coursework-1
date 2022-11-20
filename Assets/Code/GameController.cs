@@ -52,6 +52,7 @@ public class GameController : MonoBehaviour
 	public bool heartbeatStarted = false;
 	public bool finish = false;
 	public bool dead = false;
+	public bool unlimitedSloMo = true;
 
 	private Vector3 lastCheckPoint;
 	private Vector3 lastCheckPointRotation;
@@ -200,6 +201,7 @@ public class GameController : MonoBehaviour
 	{
 		slowMoBar.gameObject.SetActive(true);
 		lightningBolt.SetActive(true);
+		unlimitedSloMo = false;
 		ActivateZone(5, slowMoTimerInfo);
 	}
 
