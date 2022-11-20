@@ -189,7 +189,7 @@ public class GameController : MonoBehaviour
 		if (key2sCollected >= key2sNeeded)
 		{
 			Movedoors(door2[0], door2[1]);
-			SetAllFalse(spawnersFinal, true);
+			EnterExitRoom(finalRoom, true);
 		}
 	}
 
