@@ -74,7 +74,7 @@ public class PlayerCollisionScript : MonoBehaviour
 			gameController.slowMoTimer = 0;
 		}
 		
-		Collider[] colliders = Physics.OverlapSphere(transform.position, 20);
+		Collider[] colliders = Physics.OverlapSphere(transform.position, 100);
 
 		foreach (Collider collider in colliders)
 		{
@@ -100,7 +100,7 @@ public class PlayerCollisionScript : MonoBehaviour
 
 	private IEnumerator PowerUp2Ending()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(5);
 		gameController.powerUp2Active = false;
 		gameController.slowMoBar.m_FillColor = Color.blue;
 		Debug.Log("PowerUp2 Ended");
@@ -118,7 +118,7 @@ public class PlayerCollisionScript : MonoBehaviour
 
 	private IEnumerator PowerUp3Ending()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(5);
 		player.movementSpeed = player.movementSpeed / powerUp3Multiplier;
 		Debug.Log("PowerUp3 Ended");
 	}
