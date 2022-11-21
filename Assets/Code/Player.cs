@@ -134,7 +134,7 @@ public class Player : MonoBehaviour
 
 	public void Die()
 	{
-		if (gameController.dead)
+		if (gameController.dead || gameController.finish)
 			return;
 
 		Debug.Log("You Died!");
