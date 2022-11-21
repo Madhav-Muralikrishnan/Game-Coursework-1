@@ -66,6 +66,7 @@ public class GameController : MonoBehaviour
 	private int key2sNeeded = 4;
 	private int twoStars = 100;
 	private int threeStars = 50;
+	private List<GameObject> uI;
 
 	// Start is called before the first frame update
 	void Start()
@@ -75,6 +76,11 @@ public class GameController : MonoBehaviour
 		SetAllFalse(room3);
 		SetAllFalse(finalRoom);
 		SetAllFalse(spawnersFinal);
+		uI = new List<GameObject>()
+		{
+			slowMoTimerInfo, leftClickInfo, mouseLookInfo, doorInfo, checkPointInfo,
+			wasdInfo, standStillInfo, jumpInfo, p1Info, p2Info, p3Info, heartBeatInfo
+		};
 		
 		slowMoTimer = slowMoTimerMax;
 		slowMoBar.m_FillColor = Color.blue;
@@ -214,7 +220,10 @@ public class GameController : MonoBehaviour
 
 	public void ActivateZone(int seconds, GameObject gameObject)
 	{
-		gameObject.SetActive(true);
+		foreach (GameObject item in uI)
+		{
+			item.SetActive(item == gameObject);
+		}
 		StartCoroutine(DeleteAfterSeconds(seconds, gameObject));
 	}
 
