@@ -26,6 +26,9 @@ public class CameraScript : MonoBehaviour
 
 	private void Update()
 	{
+		if (gameController.finish)
+			zoomLevel = 5f;
+
 		cameraOrbit = (gameController.isSlowMo && gameController.slowMoTimer - minSlowMo > 0) || gameController.finish || gameController.dead;
 
 		mouseX = Input.GetAxisRaw("Mouse X") * multiplierLeftRight;
