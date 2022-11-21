@@ -39,6 +39,7 @@ public class GameController : MonoBehaviour
 	public GameObject p1Info;
 	public GameObject p2Info;
 	public GameObject p3Info;
+	public GameObject heartBeatInfo;
 	public GameObject heartBeatUI;
 	public GameObject star1;
 	public GameObject star2;

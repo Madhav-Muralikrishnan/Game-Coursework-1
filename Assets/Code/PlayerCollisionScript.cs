@@ -30,6 +30,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["P3Zone"] = () => {gameController.ActivateZone(4, gameController.p3Info);};
 		tags["DoorZone"] = () => {gameController.ActivateZone(3, gameController.doorInfo);};
 		tags["CheckPointZone"] = () => {gameController.ActivateZone(3, gameController.checkPointInfo);};
+		tags["HeartBeatInfoZone"] = () => {gameController.ActivateZone(6, gameController.heartBeatInfo);};
 		tags["HeartBeatZone"] = () => {gameController.heartBeatStart();};
 		tags["Enter1"] = () => {gameController.EnterExitRoom(gameController.spawners1, true);};
 		tags["Exit1"] = () => {gameController.EnterExitRoom(gameController.spawners1, false);};
