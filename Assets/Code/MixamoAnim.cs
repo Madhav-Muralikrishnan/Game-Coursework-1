@@ -6,6 +6,7 @@ public class MixamoAnim : MonoBehaviour
 {
 	private Animator animator;
 	public GameController gameController;
+	public Player player;
 
 	// Start is called before the first frame update
 	void Start()
@@ -16,6 +17,7 @@ public class MixamoAnim : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
+		//animator.SetBool("IsJumping", player.isGrounded);
 		animator.SetBool("ForwardWalking", Input.GetKey(KeyCode.W));
 		animator.SetBool("BackwardsWalking", Input.GetKey(KeyCode.S));
 		animator.SetBool("LeftWalking", Input.GetKey(KeyCode.A));
