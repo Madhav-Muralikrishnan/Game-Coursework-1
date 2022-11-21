@@ -44,7 +44,10 @@ public class BulletSpawner : MonoBehaviour
 	void Update()
 	{
 		if (gameController.finish)
+		{
 			Destroy(this);
+			return;
+		}
 
 		if (gameController.isSlowMo)
 		{
