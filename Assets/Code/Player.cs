@@ -101,7 +101,7 @@ public class Player : MonoBehaviour
 
 	private void SlowMoUpdate()
 	{
-		if (!moving && gameController.slowMoTimer < gameController.slowMoTimerMax)
+		if (!moving && gameController.slowMoTimer < gameController.slowMoTimerMax && isGrounded)
 		{
 			gameController.slowMoTimer += Time.deltaTime * gameController.regenSlowMoSpeed;
 		}
