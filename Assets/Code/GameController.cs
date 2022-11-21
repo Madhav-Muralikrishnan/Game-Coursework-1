@@ -132,7 +132,7 @@ public class GameController : MonoBehaviour
 		dead = false;
 		slowMoTimer = slowMoTimerMax;
 		player.transform.position = lastCheckPoint;
-		player.transform.eulerAngles = lastCheckPointRotation;
+
 		SetAllFalse(spawners1);
 		SetAllFalse(spawners2);
 		SetAllFalse(spawnersFinal);
