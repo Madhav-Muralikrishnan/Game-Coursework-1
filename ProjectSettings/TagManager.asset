@@ -37,6 +37,7 @@ TagManager:
   - Enter5
   - Exit5
   - HeartBeatInfoZone
+  - DeathFloor
   layers:
   - Default
   - TransparentFX
