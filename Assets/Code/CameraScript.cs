@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Camera : MonoBehaviour
+public class CameraScript : MonoBehaviour
 {
 	public Player player;
 	public GameController gameController;
@@ -48,12 +48,10 @@ public class Camera : MonoBehaviour
 
 		Vector3 newRotation = new Vector3(yRotation, xRotation);
 
-		// Apply damping between rotation changes
 		currentRotation = Vector3.SmoothDamp(currentRotation, newRotation, ref timeToSnap, smoothness);
 		player.gameObject.transform.localEulerAngles = new Vector3(0, currentRotation.y, 0);
 		transform.localEulerAngles = new Vector3(currentRotation.x, 0, currentRotation.z);
 
-		// Substract forward vector of the GameObject to point its forward vector to the target
 		transform.position = target.position + Vector3.up * 2 - transform.forward * zoomLevel;
 	}
 
