@@ -77,7 +77,7 @@ public class GameController : MonoBehaviour
 		
 		slowMoTimer = slowMoTimerMax;
 		slowMoBar.m_FillColor = Color.blue;
-		SetCheckpoint(new Vector3(-63,1,-7), new Vector3(0,0,0));
+		SetCheckpoint(new Vector3(-64,1,6), new Vector3(0,0,0));
 	}
 
 	// Update is called once per frame
