@@ -49,6 +49,9 @@ public class BulletSpawner : MonoBehaviour
 			return;
 		}
 
+		if (target == null && isTargeting)
+			return;
+
 		if (gameController.isSlowMo)
 		{
 			spawnTimer += Time.deltaTime * speedRatio;
