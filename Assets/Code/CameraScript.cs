@@ -8,6 +8,7 @@ public class CameraScript : MonoBehaviour
 	public Player player;
 	public GameController gameController;
 	public Transform target;
+	public Vector3 targetOffset;
 	public float smoothness;
 	public float zoomLevel = 3f;
 	public float multiplierLeftRight;
@@ -55,7 +56,7 @@ public class CameraScript : MonoBehaviour
 		player.gameObject.transform.localEulerAngles = new Vector3(0, currentRotation.y, 0);
 		transform.localEulerAngles = new Vector3(currentRotation.x, 0, currentRotation.z);
 
-		transform.position = target.position + Vector3.up * 2 - transform.forward * zoomLevel;
+		transform.position = target.position + targetOffset + Vector3.up * 2 - transform.forward * zoomLevel;
 	}
 
 }
