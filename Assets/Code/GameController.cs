@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
 	public GameObject finalScreen;
 	public CircularProgressBar slowMoBar;
 	public GameObject lightningBolt;
+	public GameObject lightningBoltRed;
 	public GameObject slowMoTimerInfo;
 	public GameObject leftClickInfo;
 	public GameObject mouseLookInfo;

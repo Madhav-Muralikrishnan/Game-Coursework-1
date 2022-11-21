@@ -100,6 +100,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		//Stop slow mo bar decreasing for amount of time
 		Debug.Log("Hit PowerUp2");
 		gameController.powerUpSound.Play();
+		gameController.lightningBoltRed.SetActive(true);
 
 		collider.gameObject.SetActive(false);
 		StartCoroutine(RespawnPowerUp(collider.gameObject));
@@ -113,6 +114,7 @@ public class PlayerCollisionScript : MonoBehaviour
 	{
 		yield return new WaitForSeconds(5);
 		gameController.powerUp2Active = false;
+		gameController.lightningBoltRed.SetActive(false);
 		Debug.Log("PowerUp2 Ended");
 	}
 
