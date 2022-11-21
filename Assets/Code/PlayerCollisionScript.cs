@@ -42,6 +42,7 @@ public class PlayerCollisionScript : MonoBehaviour
 		tags["Exit4"] = () => {gameController.EnterExitRoom(gameController.room4, false);};
 		tags["Enter5"] = () => {gameController.EnterExitRoom(gameController.spawnersFinal, true);};
 		tags["Exit5"] = () => {gameController.EnterExitRoom(gameController.spawnersFinal, false);};
+		tags["DeathFloor"] = () => {player.Die();};
 	}
 
 	private void OnTriggerEnter(Collider collider)
