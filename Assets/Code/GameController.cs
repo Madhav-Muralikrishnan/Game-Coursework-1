@@ -130,7 +130,7 @@ public class GameController : MonoBehaviour
 
 		dead = true;
 		numDeaths++;
-		StartCoroutine(RespawnAfterSeconds(5));
+		StartCoroutine(RespawnAfterSeconds(3));
 	}
 
 	private IEnumerator RespawnAfterSeconds(int seconds)
