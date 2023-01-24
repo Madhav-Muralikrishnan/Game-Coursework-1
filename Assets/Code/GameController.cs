@@ -5,30 +5,29 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-	public Player player;
-	public List<GameObject> door1;
-	public List<GameObject> door2;
-	public List<GameObject> spawners1;
-	public List<GameObject> spawners2;
-	public List<GameObject> room3;
-	public List<GameObject> room4;
-	public List<GameObject> finalRoom;
-	public List<GameObject> spawnersFinal;
-	public AudioSource heartBeatSound;
-	public AudioSource music;
-	public AudioSource finishMusic;
-	public float heartBeatVolume = 0.6f;
-	public AudioSource doorSound;
-	public AudioSource checkpointSound;
-	public AudioSource keySound;
-	public AudioSource powerUpSound;
-	public Text heartbeatText;
-	public Text finalTimerText;
-	public Text finalDeathsText;
-	public GameObject finalScreen;
-	public CircularProgressBar slowMoBar;
-	public GameObject lightningBolt;
-	public GameObject lightningBoltRed;
+	[HideInInspector]
+	public bool leftClick = false;
+	[HideInInspector]
+	public bool dead = false;
+	[HideInInspector]
+	public bool unlimitedSloMo = true;
+	[HideInInspector]
+	public bool finish = false;
+	[HideInInspector]
+	public bool isSlowMo = false;
+	[HideInInspector]
+	public bool powerUp2Active = false;
+	[HideInInspector]
+	public float slowMoTimer;
+
+	[SerializeField]
+	private Player player;
+
+	[Header("Slow Mo")]
+	public float slowMoTimerMax = 2;
+	public float regenSlowMoSpeed = 0.5f;
+
+	[Header("Tutorial Info")]
 	public GameObject slowMoTimerInfo;
 	public GameObject leftClickInfo;
 	public GameObject mouseLookInfo;
@@ -41,42 +40,80 @@ public class GameController : MonoBehaviour
 	public GameObject p2Info;
 	public GameObject p3Info;
 	public GameObject heartBeatInfo;
-	public GameObject heartBeatUI;
-	public GameObject star1;
-	public GameObject star2;
-	public GameObject star3;
-	public float slowMoTimer;
-	public float slowMoTimerMax = 2;
-	public float regenSlowMoSpeed = 0.5f;
-	public bool isSlowMo = false;
-	public bool powerUp2Active = false;
-	public bool leftClick = false;
-	public bool heartbeatStarted = false;
-	public bool finish = false;
-	public bool dead = false;
-	public bool unlimitedSloMo = true;
 
+	[Header("Rooms")]
+	public GameObject tutorialRoom1Spawners;
+	public GameObject tutorialRoom2Spawners;
+	public GameObject startRoom;
+	public GameObject tutorialRooms;
+	public GameObject finalRoomSpawners;
+
+	[SerializeField]
+	private GameObject finalRoom;
+	[SerializeField]
+	private List<GameObject> door1;
+	[SerializeField]
+	private List<GameObject> door2;
+
+	[Header("Audio")]
+	public AudioSource checkpointSound;
+	public AudioSource powerUpSound;
+
+	[SerializeField]
+	private AudioSource music;
+	[SerializeField]
+	private AudioSource finishMusic;
+	[SerializeField]
+	private AudioSource doorSound;
+	[SerializeField]
+	private AudioSource keySound;
+	[SerializeField]
+	private AudioSource heartBeatSound;
+	[SerializeField]
+	private float heartBeatVolume = 0.6f;
+
+	[Header("UI")]
+	public GameObject lightningBoltRed;
+
+	[SerializeField]
+	private Text heartbeatText;
+	[SerializeField]
+	private CircularProgressBar slowMoBar;
+	[SerializeField]
+	private GameObject lightningBolt;
+	[SerializeField]
+	private GameObject heartBeatUI;
+	[SerializeField]
+	private Text finalTimerText;
+	[SerializeField]
+	private Text finalDeathsText;
+	[SerializeField]
+	private GameObject finalScreen;
+	[SerializeField]
+	private GameObject star1;
+	[SerializeField]
+	private GameObject star2;
+	[SerializeField]
+	private GameObject star3;
+
+	private readonly float heartBeatsPerSecond = 1;
+	private readonly float timerWhenSlowMultiplier = 1;
+	private readonly int key2sNeeded = 4;
+	private readonly int twoStars = 100;
+	private readonly int threeStars = 50;
+
+	private float timer;
+	private int numDeaths;
+	private int totalHeartBeats;
+	private int key2sCollected;
+	private bool heartbeatStarted;
 	private Vector3 lastCheckPoint;
-	private Vector3 lastCheckPointRotation;
-	private int numDeaths = 0;
-	private float heartBeatsPerSecond = 1;
-	private float timerWhenSlowMultiplier = 1;
-	private float timer = 0;
-	private int totalHeartBeats = 0;
-	private int key2sCollected = 0;
-	private int key2sNeeded = 4;
-	private int twoStars = 100;
-	private int threeStars = 50;
 	private List<GameObject> uI;
 
-	// Start is called before the first frame update
 	void Start()
 	{
-		SetAllFalse(spawners1);
-		SetAllFalse(spawners2);
-		SetAllFalse(room3);
-		SetAllFalse(finalRoom);
-		SetAllFalse(spawnersFinal);
+		Cursor.visible = false;
+
 		uI = new List<GameObject>()
 		{
 			slowMoTimerInfo, leftClickInfo, mouseLookInfo, doorInfo, checkPointInfo,
@@ -85,10 +122,9 @@ public class GameController : MonoBehaviour
 		
 		slowMoTimer = slowMoTimerMax;
 		slowMoBar.m_FillColor = Color.blue;
-		SetCheckpoint(new Vector3(-64,1,6), new Vector3(0,0,0));
+		SetCheckpoint(new Vector3(-64,1,6));
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		if (finish)
@@ -140,16 +176,15 @@ public class GameController : MonoBehaviour
 		slowMoTimer = slowMoTimerMax;
 		player.transform.position = lastCheckPoint;
 
-		SetAllFalse(spawners1);
-		SetAllFalse(spawners2);
-		SetAllFalse(spawnersFinal);
+		tutorialRoom1Spawners.SetActive(false);
+		tutorialRoom2Spawners.SetActive(false);
+		finalRoomSpawners.SetActive(false);
 	}
 
-	public void SetCheckpoint(Vector3 checkPointPosition, Vector3 checkPointRotation)
+	public void SetCheckpoint(Vector3 checkPointPosition)
 	{
 		Debug.Log("Checkpoint");
 		lastCheckPoint = checkPointPosition;
-		lastCheckPointRotation = checkPointRotation;
 	}
 
 	public void Finish()
@@ -177,7 +212,6 @@ public class GameController : MonoBehaviour
 		{
 			star3.SetActive(true);
 		}
-
 	}
 
 	public void Key1()
@@ -194,7 +228,7 @@ public class GameController : MonoBehaviour
 		if (key2sCollected >= key2sNeeded)
 		{
 			Movedoors(door2[0], door2[1]);
-			EnterExitRoom(finalRoom, true);
+			finalRoom.SetActive(true);
 		}
 	}
 
@@ -219,6 +253,12 @@ public class GameController : MonoBehaviour
 		ActivateZone(3, leftClickInfo);
 	}
 
+	public void HeartBeatStart()
+	{
+		heartbeatStarted = true;
+		heartBeatUI.SetActive(true);
+	}
+
 	public void ActivateZone(int seconds, GameObject gameObject)
 	{
 		foreach (GameObject item in uI)
@@ -232,27 +272,5 @@ public class GameController : MonoBehaviour
 	{
 		yield return new WaitForSeconds(seconds);
 		gameObject.SetActive(false);
-	}
-
-	public void heartBeatStart()
-	{
-		heartbeatStarted = true;
-		heartBeatUI.SetActive(true);
-	}
-
-	public void EnterExitRoom(List<GameObject> objects, bool enter)
-	{
-		foreach(GameObject obj in objects)
-		{
-			obj.SetActive(enter);
-		}
-	}
-
-	private void SetAllFalse(List<GameObject> room, bool boolean = false)
-	{
-		foreach(GameObject obj in room)
-		{
-			obj.SetActive(boolean);
-		}
 	}
 }

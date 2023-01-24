@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 10
   slowedSpeed: 3
+  rigidBody: {fileID: -273012002575444795}
 --- !u!114 &7194110899789594492
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,8 +129,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a70c280aa980df47a367eaaf28d0ec2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numCollisions: 0
-  maxCollisions: 0
 --- !u!96 &-3399752282252713881
 TrailRenderer:
   serializedVersion: 2

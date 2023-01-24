@@ -1,21 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CameraScript : MonoBehaviour
 {
-	public Player player;
-	public GameController gameController;
-	public Transform target;
-	public Vector3 targetOffset;
-	public float smoothness;
-	public float zoomLevel = 3f;
-	public float multiplierLeftRight;
-	public float multiplierUp;
-	public Vector2 yClamping = new Vector2(-90, 90);
-	public float minSlowMo = 0.1f;
+	[Header("Objects")]
+	[SerializeField]
+	private Player player;
+	[SerializeField]
+	private GameController gameController;
 
+	[Header("Camera Movement")]
+	[SerializeField]
+	private Transform target;
+	[SerializeField]
+	private float smoothness;
+	[SerializeField]
+	private float zoomLevel = 3f;
+	[SerializeField]
+	private Vector2 yClamping = new(-90, 90);
+
+	[Header("Mouse Sensitivity")]
+	[SerializeField]
+	private float multiplierLeftRight;
+	[SerializeField]
+	private float multiplierUp;
+
+	private const float minSlowMo = 0.1f;
 	private float mouseX;
 	private float mouseY;
 	private float xRotation;
@@ -25,7 +34,7 @@ public class CameraScript : MonoBehaviour
 	private Vector3 cameraOffset = Vector3.up;
 	private Vector3 timeToSnap = Vector3.zero;
 
-	private void Update()
+	void Update()
 	{
 		if (gameController.finish)
 			zoomLevel = 5f;
@@ -50,13 +59,12 @@ public class CameraScript : MonoBehaviour
 			return;
 		}
 
-		Vector3 newRotation = new Vector3(yRotation, xRotation);
+		Vector3 newRotation = new(yRotation, xRotation);
 
 		currentRotation = Vector3.SmoothDamp(currentRotation, newRotation, ref timeToSnap, smoothness);
 		player.gameObject.transform.localEulerAngles = new Vector3(0, currentRotation.y, 0);
 		transform.localEulerAngles = new Vector3(currentRotation.x, 0, currentRotation.z);
 
-		transform.position = target.position + targetOffset + Vector3.up * 2 - transform.forward * zoomLevel;
+		transform.position = target.position + Vector3.up * 2 - transform.forward * zoomLevel;
 	}
-
 }
