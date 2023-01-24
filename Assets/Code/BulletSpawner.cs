@@ -36,8 +36,8 @@ public class BulletSpawner : MonoBehaviour
 	[SerializeField]
 	private Vector3 adjustment;
 
+	private readonly List<GameObject> pooledBullets = new();
 
-	private List<GameObject> pooledBullets;
 	private GameController gameController;
 	private float spawnTimer;
 	private float timer;
@@ -101,9 +101,9 @@ public class BulletSpawner : MonoBehaviour
 
 	private GameObject GetObject()
 	{
-		foreach(GameObject obj in pooledBullets)
+		foreach (GameObject obj in pooledBullets)
 		{
-			if(!obj.activeInHierarchy)
+			if (!obj.activeInHierarchy)
 			{
 				return obj;
 			}
