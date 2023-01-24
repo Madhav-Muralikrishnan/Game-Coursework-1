@@ -4,30 +4,49 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
-	public GameObject bullet;
-	public float delayBetweenShoot = 1.0f;
-	public float maxRotation;
-	public float rotationSpeed;
-	public float maxHeight;
-	public float verticalSpeed;
-	public float maxHorizontal;
-	public float horizontalSpeed;
-	public bool isTargeting;
-	public GameObject target;
-	public Vector3 adjustment;
-	public bool isWorking = true;
+	[Header("Shooting")]
+	[SerializeField]
+	private GameObject bullet;
+	[SerializeField]
+	private float delayBetweenShoot = 1.0f;
+	[SerializeField]
+	private bool isWorking = true;
 
-	private List<GameObject> pooledBullets = new List<GameObject>();
+	[Header("Rotation")]
+	[SerializeField]
+	private float maxRotation;
+	[SerializeField]
+	private float rotationSpeed;
+
+	[Header("Movement")]
+	[SerializeField]
+	private float maxHeight;
+	[SerializeField]
+	private float verticalSpeed;
+	[SerializeField]
+	private float maxHorizontal;
+	[SerializeField]
+	private float horizontalSpeed;
+
+	[Header("Targeting")]
+	[SerializeField]
+	private bool isTargeting;
+	[SerializeField]
+	private GameObject target;
+	[SerializeField]
+	private Vector3 adjustment;
+
+
+	private List<GameObject> pooledBullets;
 	private GameController gameController;
-	private float spawnTimer = 0;
-	private float timer = 0;
+	private float spawnTimer;
+	private float timer;
 	private float speedRatio;
 	private float initialRotation;
 	private float initialHeight;
 	private float initialHorizontal;
 
 
-	// Start is called before the first frame update
 	void Start()
 	{
 		BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
@@ -40,7 +59,6 @@ public class BulletSpawner : MonoBehaviour
 		initialHorizontal = transform.position.x;
 	}
 
-	// Update is called once per frame
 	void Update()
 	{
 		if (gameController.finish)
@@ -69,20 +87,19 @@ public class BulletSpawner : MonoBehaviour
 			Spawn();
 	}
 
-	void Spawn()
+	private void Spawn()
 	{
 		GameObject bullet = GetObject(); 
 		if (bullet != null)
 		{
-			bullet.transform.position = transform.position + transform.forward;
-			bullet.transform.rotation = transform.rotation;
+            bullet.transform.SetPositionAndRotation(transform.position + transform.forward, transform.rotation);
 			bullet.SetActive(true);
 		}
 
 		spawnTimer = 0;
 	}
 
-	GameObject GetObject()
+	private GameObject GetObject()
 	{
 		foreach(GameObject obj in pooledBullets)
 		{

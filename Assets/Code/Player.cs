@@ -1,33 +1,34 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
 	public float movementSpeed = 5;
-	public float jumpForce = 1f;
-	public float jumpGravity = 7f;
-	public AudioSource deathSound;
-
+	
+	[Header("Objects")]
+	[SerializeField]
 	private GameController gameController;
+	[SerializeField]
 	private Rigidbody rigidBody;
-	private float playerHeight = 2f;
-	private bool moving = false;
+
+	[Header("Jumping")]
+	[SerializeField]
+	private float jumpForce = 1f;
+	[SerializeField]
+	private float jumpGravity = 7f;
+
+	[Header("Audio")]
+	[SerializeField]
+	private AudioSource deathSound;
+
+	private readonly float playerHeight = 2f;
+	private readonly float wallDistance = 1f;
+
+	private bool moving;
 	private bool isGrounded;
 	private bool isOnForwardWall;
 	private bool isOnBackwardWall;
 	private bool isOnLeftWall;
 	private bool isOnRightWall;
-	private float wallDistance = 1f;
-
-
-	// Start is called before the first frame update
-	void Start()
-	{
-		Cursor.visible = false;
-		gameController = FindObjectOfType<GameController>();
-		rigidBody = GetComponent<Rigidbody>();
-	}
 
 	private void Update()
 	{
@@ -89,11 +90,11 @@ public class Player : MonoBehaviour
 	{
 		if(positive)
 		{
-			rigidBody.velocity += direction * movementSpeed * Time.deltaTime;
+			rigidBody.velocity += movementSpeed * Time.deltaTime * direction;
 		}
 		else
 		{
-			rigidBody.velocity -= direction * movementSpeed * Time.deltaTime;
+			rigidBody.velocity -= movementSpeed * Time.deltaTime * direction;
 		}
 
 		moving = true;
@@ -102,10 +103,8 @@ public class Player : MonoBehaviour
 	private void SlowMoUpdate()
 	{
 		if (!moving && gameController.slowMoTimer < gameController.slowMoTimerMax && isGrounded)
-		{
 			gameController.slowMoTimer += Time.deltaTime * gameController.regenSlowMoSpeed;
-		}
-
+		
 		if (gameController.slowMoTimer != 0)
 		{
 			UseSlowMo();
@@ -126,9 +125,7 @@ public class Player : MonoBehaviour
 				gameController.slowMoTimer -= Time.deltaTime;
 
 			if (gameController.slowMoTimer < 0)
-			{
 				gameController.slowMoTimer = 0;
-			}
 		}
 	}
 
@@ -145,8 +142,6 @@ public class Player : MonoBehaviour
 	private void ControlDrag()
 	{
 		if(rigidBody.velocity.y < 0)
-		{
 			rigidBody.AddForce(Vector3.down * jumpGravity, ForceMode.Acceleration);
-		}
 	}
 }

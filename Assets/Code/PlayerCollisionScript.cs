@@ -5,51 +5,54 @@ using UnityEngine;
 
 public class PlayerCollisionScript : MonoBehaviour
 {
+	[SerializeField]
 	private GameController gameController;
+	[SerializeField]
 	private Player player;
-	private float powerUp1Cost = 1;
-	private float powerUp2Increase = 0.1f;
-	private float powerUp3Multiplier = 2;
+	
+	private const float powerUp1Cost = 1;
+	private const float powerUp2Increase = 0.1f;
+	private const float powerUp3Multiplier = 2;
+
 	private Dictionary<string, Action> tags;
 
 	void Start()
 	{
-		player = GetComponent<Player>();
-		gameController = FindObjectOfType<GameController>();
-		
-		tags = new Dictionary<string, Action>();
-		tags["Finish"] = () => {gameController.Finish();};
-		tags["LeftClickZone"] = () => {gameController.LeftClickZone();};
-		tags["SlowMoZone"] = () => {gameController.ActivateSlowMoBar();};
-		tags["WASDZone"] = () => {gameController.ActivateZone(2, gameController.wasdInfo);};
-		tags["StandStillZone"] = () => {gameController.ActivateZone(3, gameController.standStillInfo);};
-		tags["MouseLookZone"] = () => {gameController.ActivateZone(2, gameController.mouseLookInfo);};
-		tags["JumpZone"] = () => {gameController.ActivateZone(4, gameController.jumpInfo);};
-		tags["P1Zone"] = () => {gameController.ActivateZone(4, gameController.p1Info);};
-		tags["P2Zone"] = () => {gameController.ActivateZone(4, gameController.p2Info);};
-		tags["P3Zone"] = () => {gameController.ActivateZone(4, gameController.p3Info);};
-		tags["DoorZone"] = () => {gameController.ActivateZone(3, gameController.doorInfo);};
-		tags["CheckPointZone"] = () => {gameController.ActivateZone(3, gameController.checkPointInfo);};
-		tags["HeartBeatInfoZone"] = () => {gameController.ActivateZone(6, gameController.heartBeatInfo);};
-		tags["HeartBeatZone"] = () => {gameController.heartBeatStart();};
-		tags["Enter1"] = () => {gameController.EnterExitRoom(gameController.spawners1, true);};
-		tags["Exit1"] = () => {gameController.EnterExitRoom(gameController.spawners1, false);};
-		tags["Enter2"] = () => {gameController.EnterExitRoom(gameController.spawners2, true);};
-		tags["Exit2"] = () => {gameController.EnterExitRoom(gameController.spawners2, false);};
-		tags["Enter3"] = () => {gameController.EnterExitRoom(gameController.room3, true);};
-		tags["Exit3"] = () => {gameController.EnterExitRoom(gameController.room3, false);};
-		tags["Enter4"] = () => {gameController.EnterExitRoom(gameController.room4, true);};
-		tags["Exit4"] = () => {gameController.EnterExitRoom(gameController.room4, false);};
-		tags["Enter5"] = () => {gameController.EnterExitRoom(gameController.spawnersFinal, true);};
-		tags["Exit5"] = () => {gameController.EnterExitRoom(gameController.spawnersFinal, false);};
-		tags["DeathFloor"] = () => {player.Die();};
-	}
+        tags = new Dictionary<string, Action>
+        {
+            ["Finish"] = () => { gameController.Finish(); },
+            ["LeftClickZone"] = () => { gameController.LeftClickZone(); },
+            ["SlowMoZone"] = () => { gameController.ActivateSlowMoBar(); },
+            ["WASDZone"] = () => { gameController.ActivateZone(2, gameController.wasdInfo); },
+            ["StandStillZone"] = () => { gameController.ActivateZone(3, gameController.standStillInfo); },
+            ["MouseLookZone"] = () => { gameController.ActivateZone(2, gameController.mouseLookInfo); },
+            ["JumpZone"] = () => { gameController.ActivateZone(4, gameController.jumpInfo); },
+            ["P1Zone"] = () => { gameController.ActivateZone(4, gameController.p1Info); },
+            ["P2Zone"] = () => { gameController.ActivateZone(4, gameController.p2Info); },
+            ["P3Zone"] = () => { gameController.ActivateZone(4, gameController.p3Info); },
+            ["DoorZone"] = () => { gameController.ActivateZone(3, gameController.doorInfo); },
+            ["CheckPointZone"] = () => { gameController.ActivateZone(3, gameController.checkPointInfo); },
+            ["HeartBeatInfoZone"] = () => { gameController.ActivateZone(6, gameController.heartBeatInfo); },
+            ["HeartBeatZone"] = () => { gameController.HeartBeatStart(); },
+            ["Enter1"] = () => { gameController.tutorialRoom1Spawners.SetActive(true); },
+            ["Exit1"] = () => { gameController.tutorialRoom1Spawners.SetActive(false); },
+            ["Enter2"] = () => { gameController.tutorialRoom2Spawners.SetActive(true); },
+            ["Exit2"] = () => { gameController.tutorialRoom2Spawners.SetActive(false); },
+            ["Enter3"] = () => { gameController.tutorialRooms.SetActive(true); },
+            ["Exit3"] = () => { gameController.tutorialRooms.SetActive(false); },
+            ["Enter4"] = () => { gameController.startRoom.SetActive(true); },
+            ["Exit4"] = () => { gameController.startRoom.SetActive(false); },
+            ["Enter5"] = () => { gameController.finalRoomSpawners.SetActive(true); },
+            ["Exit5"] = () => { gameController.finalRoomSpawners.SetActive(false); },
+            ["DeathFloor"] = () => { player.Die(); }
+        };
+    }
 
 	private void OnTriggerEnter(Collider collider)
 	{
 		tags["Checkpoint"] = () =>
 		{
-			gameController.SetCheckpoint(collider.gameObject.transform.position, Vector3.zero);
+			gameController.SetCheckpoint(collider.gameObject.transform.position);
 			gameController.checkpointSound.Play();
 		};
 		
@@ -82,11 +85,11 @@ public class PlayerCollisionScript : MonoBehaviour
 
 		foreach (Collider collider in colliders)
 		{
-			if (collider?.gameObject?.tag == "BulletSpawner")
+			if (collider.gameObject.CompareTag("BulletSpawner"))
 			{
 				collider.gameObject.GetComponent<BulletSpawner>().EMP();
 			}
-			else if (collider?.gameObject?.tag == "Bullet")
+			else if (collider.gameObject.CompareTag("Bullet"))
 			{
 				collider.gameObject.SetActive(false);
 			}
@@ -127,14 +130,14 @@ public class PlayerCollisionScript : MonoBehaviour
 		collider.gameObject.SetActive(false);
 		StartCoroutine(RespawnPowerUp(collider.gameObject));
 
-		player.movementSpeed = player.movementSpeed * powerUp3Multiplier;
+		player.movementSpeed *= powerUp3Multiplier;
 		StartCoroutine(PowerUp3Ending());
 	}
 
 	private IEnumerator PowerUp3Ending()
 	{
 		yield return new WaitForSeconds(5);
-		player.movementSpeed = player.movementSpeed / powerUp3Multiplier;
+		player.movementSpeed /= powerUp3Multiplier;
 		Debug.Log("PowerUp3 Ended");
 	}
 
