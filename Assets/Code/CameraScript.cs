@@ -30,7 +30,7 @@ public class CameraScript : MonoBehaviour
 	private float xRotation;
 	private float yRotation;
 	private Vector3 currentRotation;
-	private bool cameraOrbit = false;
+	private bool cameraOrbit;
 	private Vector3 cameraOffset = Vector3.up;
 	private Vector3 timeToSnap = Vector3.zero;
 

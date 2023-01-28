@@ -70,32 +70,25 @@ public class Player : MonoBehaviour
 	{
 		if (Input.GetKey(KeyCode.W) && !isOnForwardWall)
 		{
-			VelocityChanges(transform.forward, true);
+			VelocityChanges(transform.forward);
 		}
 		if (Input.GetKey(KeyCode.S) && !isOnBackwardWall)
 		{
-			VelocityChanges(transform.forward, false);
+			VelocityChanges(-transform.forward);
 		}
 		if (Input.GetKey(KeyCode.D) && !isOnRightWall)
 		{
-			VelocityChanges(transform.right, true);
+			VelocityChanges(transform.right);
 		}
 		if (Input.GetKey(KeyCode.A) && !isOnLeftWall)
 		{
-			VelocityChanges(transform.right, false);
+			VelocityChanges(-transform.right);
 		}
 	}
 
-	private void VelocityChanges(Vector3 direction, bool positive)
+	private void VelocityChanges(Vector3 direction)
 	{
-		if(positive)
-		{
-			rigidBody.velocity += movementSpeed * Time.deltaTime * direction;
-		}
-		else
-		{
-			rigidBody.velocity -= movementSpeed * Time.deltaTime * direction;
-		}
+		rigidBody.velocity += movementSpeed * Time.deltaTime * direction;
 
 		moving = true;
 	}
