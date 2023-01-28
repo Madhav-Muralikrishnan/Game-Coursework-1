@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class GameController : MonoBehaviour
 {
 	[HideInInspector]
-	public bool leftClick = false;
+	public bool leftClick;
 	[HideInInspector]
-	public bool dead = false;
+	public bool dead;
 	[HideInInspector]
 	public bool unlimitedSloMo = true;
 	[HideInInspector]
-	public bool finish = false;
+	public bool finish;
 	[HideInInspector]
-	public bool isSlowMo = false;
+	public bool isSlowMo;
 	[HideInInspector]
-	public bool powerUp2Active = false;
+	public bool powerUp2Active;
 	[HideInInspector]
 	public float slowMoTimer;
 

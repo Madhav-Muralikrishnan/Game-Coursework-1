@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class BulletSpawner : MonoBehaviour
 {
+	[SerializeField]
+	private GameController gameController;
+
 	[Header("Shooting")]
 	[SerializeField]
 	private GameObject bullet;
+	[SerializeField]
+	private BulletMovement bulletMovement;
 	[SerializeField]
 	private float delayBetweenShoot = 1.0f;
 	[SerializeField]
@@ -38,7 +43,6 @@ public class BulletSpawner : MonoBehaviour
 
 	private readonly List<GameObject> pooledBullets = new();
 
-	private GameController gameController;
 	private float spawnTimer;
 	private float timer;
 	private float speedRatio;
@@ -49,9 +53,6 @@ public class BulletSpawner : MonoBehaviour
 
 	void Start()
 	{
-		BulletMovement bulletMovement = bullet.GetComponent<BulletMovement>();
-		gameController = FindObjectOfType<GameController>();
-
 		speedRatio = bulletMovement.slowedSpeed / bulletMovement.movementSpeed;
 
 		initialRotation = transform.eulerAngles.y;

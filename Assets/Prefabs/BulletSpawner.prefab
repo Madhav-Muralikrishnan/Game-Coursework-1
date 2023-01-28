@@ -46,8 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d14a764d55b882640b712b993b8cc862, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 0}
   bullet: {fileID: 3009230849025195590, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
+  bulletMovement: {fileID: 3009230849025195593, guid: 1c4b3f1471dfc5442a7deddc6a3cec1a, type: 3}
   delayBetweenShoot: 0.37
+  isWorking: 1
   maxRotation: 45
   rotationSpeed: 0.5
   maxHeight: 2.5
@@ -57,7 +60,6 @@ MonoBehaviour:
   isTargeting: 0
   target: {fileID: 0}
   adjustment: {x: 0, y: 0, z: 0}
-  isWorking: 1
 --- !u!65 &9070314005649173884
 BoxCollider:
   m_ObjectHideFlags: 0
